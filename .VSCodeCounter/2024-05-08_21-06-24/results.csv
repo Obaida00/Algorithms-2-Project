@@ -1,0 +1,13 @@
+"filename", "language", "Java", "Markdown", "comment", "blank", "total"
+"f:\REPO\Algorithms-2-Project\App\README.md", "Markdown", 0, 0, 0, 1, 1
+"f:\REPO\Algorithms-2-Project\App\bin\App.class", "Java", 13, 0, 0, 0, 13
+"f:\REPO\Algorithms-2-Project\App\bin\FileHandler.class", "Java", 61, 0, 0, 0, 61
+"f:\REPO\Algorithms-2-Project\App\bin\Tree.class", "Java", 27, 0, 0, 0, 27
+"f:\REPO\Algorithms-2-Project\App\bin\TreeNode.class", "Java", 29, 0, 0, 0, 29
+"f:\REPO\Algorithms-2-Project\App\src\Modules\App.java", "Java", 12, 0, 1, 5, 18
+"f:\REPO\Algorithms-2-Project\App\src\Modules\BinaryNode.java", "Java", 9, 0, 0, 2, 11
+"f:\REPO\Algorithms-2-Project\App\src\Modules\FileHandler.java", "Java", 133, 0, 12, 23, 168
+"f:\REPO\Algorithms-2-Project\App\src\Modules\GeneralNode.java", "Java", 15, 0, 0, 5, 20
+"f:\REPO\Algorithms-2-Project\App\src\Modules\Tree.java", "Java", 106, 0, 83, 45, 234
+"f:\REPO\Algorithms-2-Project\App\src\Modules\TreeNode.java", "Java", 3, 0, 0, 3, 6
+"Total", "-", 408, 0, 96, 84, 588
