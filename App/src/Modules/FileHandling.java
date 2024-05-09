@@ -22,7 +22,7 @@ public class FileHandling {
         this.outputPath = outputPath;
         inputFile = new File(inputPath);
         outputFile = new File(outputPath);
-        
+
         try {
             writer = new BufferedWriter(new FileWriter(outputFile));
         } catch (IOException e) {
@@ -36,7 +36,7 @@ public class FileHandling {
         }
     }
 
-    //reads a single line from the input file and returns it as a string
+    // reads a single line from the input file and returns it as a string
     private String readLineToStirng() {
         String line = null;
         try {
@@ -47,7 +47,8 @@ public class FileHandling {
         return line;
     }
 
-    //reads a single line from the input and returns it as an array containing ONLY alphabiticals
+    // reads a single line from the input and returns it as an array containing ONLY
+    // alphabiticals
     public ArrayList<Character> readLineToCharList() {
         String line = this.readLineToStirng();
         ArrayList<Character> charList = new ArrayList<>();
@@ -63,8 +64,8 @@ public class FileHandling {
         return charList;
     }
 
-    //appends a single line to the output file
-    private void saveLine(String line){
+    // appends a single line to the output file
+    private void saveLine(String line) {
         try {
             writer.append(line);
             writer.newLine();
@@ -73,49 +74,97 @@ public class FileHandling {
         }
     }
 
-    //saves the tree to the output file with the required formatting: root -> ch1, ch2, ch3
+    // saves the General tree to the output file with the required formatting: root -> ch1,
+    // ch2, ch3
     //
-    //eg. A -> B, C, D
-    //    C -> E, G
-    public void saveTree(Tree tree) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(tree.getRoot());
+    // eg. A -> B, C, D
+    // C -> E, G
+    public boolean saveGeneralTreeToFile(GeneralNode root) {
+        Queue<GeneralNode> queue = new LinkedList<>();
+        if(root == null)
+            return false;
+        queue.add(root);
 
         while (!queue.isEmpty()) {
             StringBuilder line = new StringBuilder();
-            TreeNode currentNode = queue.remove();
-            if (currentNode.getChildren().isEmpty())
+            GeneralNode current = queue.remove();
+            if (!current.hasChild())
                 continue;
-            line.append(currentNode.getValue() + " -> ");
+
+            line.append(current.value + " -> ");
 
             boolean firstChild = true;
-            for (TreeNode node : currentNode.getChildren()) {
+            int childCount = current.children.size();
+
+            for (int i = 0; i < childCount; i++) {
+                GeneralNode node = current.children.get(i);
+                if (node == null)
+                    continue;
+
                 queue.add(node);
-                if (!firstChild)
+                if (!firstChild) {
                     line.append(", ");
-                    line.append(node.getValue());
+                }
+                line.append(node.value);
                 firstChild = false;
             }
             saveLine(line.toString());
         }
+        return true;
     }
 
-    //loads a tree form the input file with the correct formatting and converts it to a Tree instence
-    public Tree loadTree(){
+    // saves the Binary tree to the output file with the required formatting: root -> ch1, ch2, ch3 and returns if the process is succeeded
+    //
+    // eg. A -> B, C, D
+    // C -> E, G
+    public boolean saveBinaryTreeToFile(BinaryNode root) {
+        Queue<BinaryNode> queue = new LinkedList<>();
+        if(root == null)
+            return false;
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            StringBuilder line = new StringBuilder();
+            BinaryNode current = queue.remove();
+            if (current.left == null && current.right == null)
+                continue;
+
+            line.append(current.value + " -> ");
+
+            if (current.left == null) {
+                line.append("null,");
+            } else {
+                line.append(current.left.value + ", ");
+                queue.add(current.left);
+            }
+            
+            if (current.right == null) {
+                line.append("null");
+            } else {
+                line.append(current.right.value);
+                queue.add(current.right);
+            }
+            saveLine(line.toString());
+        }
+        return true;
+    }
+
+    // loads a tree form the input file with the correct formatting and converts it to a Tree instence
+    public Tree loadTree() {
         Tree tree = null;
         ArrayList<Character> line;
-        while (!(line = this.readLineToCharList()).isEmpty()){
-            TreeNode newNode = TreeNode.convertCharListToNode(line);
-            if(tree==null)
-                tree = new Tree(newNode);//for now.. the nodes are given in order
-            
-            tree.findNode(newNode).setNode(newNode);
+        while ((line = this.readLineToCharList()).size() > 0) {
+            GeneralNode newNode = Tree.convertCharListToNode(line);
+            if (tree == null) {
+                tree = new Tree(newNode);// for now.. the nodes are given in order
+            }
+            tree.findGeneralNode(newNode).children = newNode.children;
         }
         return tree;
     }
 
-    //closes the opening reading/writing streams
-    public void close(){
+    // closes the opening reading/writing streams
+    public void close() {
         try {
             reader.close();
             writer.close();
