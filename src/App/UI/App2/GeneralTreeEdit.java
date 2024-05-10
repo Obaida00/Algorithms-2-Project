@@ -1,5 +1,7 @@
-package App.UI;
+package App.UI.App2;
 
+import App.Logic.App2.Tree2;
+import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,8 +12,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class binaryTreeEdit {
-    public binaryTreeEdit() {
+public class GeneralTreeEdit {
+
+    private Tree2 tree;
+    private boolean newTree;
+
+    public GeneralTreeEdit(Tree2 tree, boolean newTree) {
+        //sets the parameters
+        this.newTree = newTree;
+        this.tree = tree;
+
         //initialize the root and scene
         Group root = new Group();
         Scene scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
@@ -19,31 +29,32 @@ public class binaryTreeEdit {
         //todo draw the tree
 
         //set and style the closeBtn
-        Button close = new Button("X");
-        close.setLayoutX(460);
-        close.setLayoutY(10);
-        close.setBackground(null);
-        close.setPrefSize(10, 20);
-        close.setStyle("-fx-background-color:null; -fx-text-fill:red");
-        close.setFont(Font.font("system ui", 15));
-        close.setTooltip(new Tooltip("close"));
-        root.getChildren().add(close);
+        Button closeBtn = new Button("X");
+        closeBtn.setLayoutX(460);
+        closeBtn.setLayoutY(10);
+        closeBtn.setBackground(null);
+        closeBtn.setPrefSize(10, 20);
+        closeBtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
+        closeBtn.setFont(Font.font("system ui", 15));
+        closeBtn.setTooltip(new Tooltip("close"));
+        root.getChildren().add(closeBtn);
         DropShadow shadow = new DropShadow();
 
         //closeBtn hover effect
-        close.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-            close.setEffect(shadow);
-            close.setCursor(Cursor.HAND);
+        closeBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            closeBtn.setEffect(shadow);
+            closeBtn.setCursor(Cursor.HAND);
         });
 
-        close.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-            close.setEffect(null);
-            close.setCursor(Cursor.DEFAULT);
+        closeBtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+            closeBtn.setEffect(null);
+            closeBtn.setCursor(Cursor.DEFAULT);
         });
 
         //closeBtn action
-        close.setOnAction(e -> {
-            RunUI.close();
+        closeBtn.setOnAction(e -> {
+            this.saveAndMigrate();
+            RunUI.goBack();
         });
 
         //set and style the saveBtn
@@ -66,13 +77,12 @@ public class binaryTreeEdit {
             saveBtn.setCursor(Cursor.DEFAULT);
         });
 
-        //todo saveBtn action
         saveBtn.setOnAction(e -> {
-
+            this.saveTree();
         });
 
         //set and style the transformBtn
-        Button transformBtn = new Button("Transform into general tree");
+        Button transformBtn = new Button("Transform into binary tree");
         transformBtn.setLayoutX(290);
         transformBtn.setLayoutY(300);
         transformBtn.setPrefSize(190, 20);
@@ -91,12 +101,33 @@ public class binaryTreeEdit {
             transformBtn.setCursor(Cursor.DEFAULT);
         });
 
-        //transformBtn hover effect
+        //transformBtn action
         transformBtn.setOnAction(e -> {
-            RunUI.goBack();
+            new binaryTreeEdit();
         });
 
 
         RunUI.setScene(scene, true);
+    }
+
+    private void saveAndMigrate() {
+        this.saveTree();
+
+        //migrate output file to input file cause its saved
+        RunUI.migrateOutput();
+    }
+
+    private void saveTree() {
+        //save the General tree
+        this.tree.saveTreeToFile(RunUI.fileHandler2, false);
+
+        //update callstack
+        if (newTree) {
+            Scene s = RunUI.popCallStack();
+            RunUI.popCallStack();
+            RunUI.popCallStack();
+            RunUI.pushCallStack(s);
+            newTree = false;
+        }
     }
 }

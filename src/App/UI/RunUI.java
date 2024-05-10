@@ -45,8 +45,12 @@ public class RunUI {
             setScene(callStack.peek(), false);
     }
 
-    public static void popCallStack() {
-        callStack.pop();
+    public static Scene popCallStack() {
+        return callStack.pop();
+    }
+
+    public static void pushCallStack(Scene s) {
+        callStack.push(s);
     }
 
     private static void initApp1() {
@@ -54,11 +58,17 @@ public class RunUI {
     }
 
     private static void initApp2() {
-        fileHandler2 = new FileHandler2(App.input1, App.input1);
+        fileHandler2 = new FileHandler2(App.input1, App.output1);
+    }
+
+    public static void migrateOutput(){
+        fileHandler2.migrateOutput();
     }
 
     public static void close() {
         fileHandler2.close();
         window.close();
     }
+
+    //todo maybe set working tree
 }

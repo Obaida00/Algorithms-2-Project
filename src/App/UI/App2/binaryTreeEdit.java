@@ -1,6 +1,6 @@
-package App.UI;
+package App.UI.App2;
 
-import App.Logic.App2.Tree2;
+import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,14 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class GeneralTreeEdit {
-
-    private Tree2 tree;
-
-    public GeneralTreeEdit(Tree2 tree) {
-        //sets the tree
-        this.tree = tree;
-
+public class binaryTreeEdit {
+    public binaryTreeEdit() {
         //initialize the root and scene
         Group root = new Group();
         Scene scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
@@ -26,31 +20,31 @@ public class GeneralTreeEdit {
         //todo draw the tree
 
         //set and style the closeBtn
-        Button closeBtn = new Button("X");
-        closeBtn.setLayoutX(460);
-        closeBtn.setLayoutY(10);
-        closeBtn.setBackground(null);
-        closeBtn.setPrefSize(10, 20);
-        closeBtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
-        closeBtn.setFont(Font.font("system ui", 15));
-        closeBtn.setTooltip(new Tooltip("close"));
-        root.getChildren().add(closeBtn);
+        Button close = new Button("X");
+        close.setLayoutX(460);
+        close.setLayoutY(10);
+        close.setBackground(null);
+        close.setPrefSize(10, 20);
+        close.setStyle("-fx-background-color:null; -fx-text-fill:red");
+        close.setFont(Font.font("system ui", 15));
+        close.setTooltip(new Tooltip("close"));
+        root.getChildren().add(close);
         DropShadow shadow = new DropShadow();
 
         //closeBtn hover effect
-        closeBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-            closeBtn.setEffect(shadow);
-            closeBtn.setCursor(Cursor.HAND);
+        close.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            close.setEffect(shadow);
+            close.setCursor(Cursor.HAND);
         });
 
-        closeBtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-            closeBtn.setEffect(null);
-            closeBtn.setCursor(Cursor.DEFAULT);
+        close.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+            close.setEffect(null);
+            close.setCursor(Cursor.DEFAULT);
         });
 
         //closeBtn action
-        closeBtn.setOnAction(e -> {
-            RunUI.goBack();
+        close.setOnAction(e -> {
+            RunUI.close();
         });
 
         //set and style the saveBtn
@@ -73,13 +67,13 @@ public class GeneralTreeEdit {
             saveBtn.setCursor(Cursor.DEFAULT);
         });
 
+        //todo saveBtn action
         saveBtn.setOnAction(e -> {
-            //todo configure what should be done with the callstack
-            this.tree.saveTreeToFile(RunUI.fileHandler2, false);
+
         });
 
         //set and style the transformBtn
-        Button transformBtn = new Button("Transform into binary tree");
+        Button transformBtn = new Button("Transform into general tree");
         transformBtn.setLayoutX(290);
         transformBtn.setLayoutY(300);
         transformBtn.setPrefSize(190, 20);
@@ -98,9 +92,9 @@ public class GeneralTreeEdit {
             transformBtn.setCursor(Cursor.DEFAULT);
         });
 
-        //transformBtn action
+        //transformBtn hover effect
         transformBtn.setOnAction(e -> {
-            new binaryTreeEdit();
+            RunUI.goBack();
         });
 
 

@@ -1,6 +1,6 @@
-package App.UI;
+package App.UI.App2;
 
-import App.Logic.App2.Tree2;
+import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -80,9 +80,5 @@ public class TreeEmpty {
 
 
         RunUI.setScene(scene, true);
-    }
-
-    public void setWorkingTree(Tree2 tree) {
-
     }
 }

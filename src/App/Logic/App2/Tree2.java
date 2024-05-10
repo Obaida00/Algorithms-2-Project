@@ -194,6 +194,7 @@ public class Tree2 {
     // saves the version for the tree specified by the binaryVersion and returns if
     // the process was succeeded
     public boolean saveTreeToFile(FileHandler2 fileHandler, boolean binaryVersion) {
+
         if (binaryVersion && this.binaryRoot != null) {
             fileHandler.saveBinaryTreeToFile(this.binaryRoot);
             return true;
@@ -202,7 +203,6 @@ public class Tree2 {
             return true;
         }
         return false;
-
     }
 
     // I am considering the positioning in pixels therefor the parameters are
