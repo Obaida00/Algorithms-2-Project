@@ -10,7 +10,9 @@ public class App {
 
         Tree tree = fileHandlerGeneral.loadTree();
         tree.buildBinary();
+        tree.generalRoot = null;
         
+        tree.buildGeneral();
         tree.saveTreeToFile(fileHandlerGeneral, false);
         tree.saveTreeToFile(fileHandlerBinary, true);
         // tree.printGeneralTreeToConsole();

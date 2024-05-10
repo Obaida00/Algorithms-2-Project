@@ -63,6 +63,28 @@ public class Tree {
 
         return binary;
     }
+
+    public void buildGeneral() {
+        this.generalRoot = toGeneralTree(this.binaryRoot);
+    }
+
+    public GeneralNode toGeneralTree(BinaryNode node) {
+        if (node == null)
+            return null;
+        GeneralNode general = new GeneralNode(node.value);
+
+        if (node.right != null) {
+            general.children.addLast(toGeneralTree(node.right));
+
+            BinaryNode current = node.right;
+            while (current.left != null) {
+                general.children.addFirst(toGeneralTree(current.left));
+                current = current.left;
+            }
+        }
+
+        return general;
+    }
     // public void toBinaryTree() { //doesn't work
     // binaryRoot = new TreeNode(null, this.treeRoot.getValue());
     // // Tree binaryTree = new Tree(newRoot, true);
