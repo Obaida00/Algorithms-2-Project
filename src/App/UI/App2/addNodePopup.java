@@ -1,6 +1,8 @@
-package App.UI;
+package App.UI.App2;
 
+import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
+import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -92,7 +94,8 @@ public class addNodePopup {
                 //todo output error msg <only characters are allowed>
             } else {
                 Tree2 tree = new Tree2(input.charAt(0));
-                new GeneralTreeEdit(tree);
+                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
+                new GeneralTreeEdit(tree, true);
             }
         });
 

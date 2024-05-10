@@ -2,6 +2,8 @@ package App.UI;
 
 import App.Logic.App1.Tree1;
 import App.Logic.App2.Tree2;
+import App.UI.App2.GeneralTreeEdit;
+import App.UI.App2.TreeEmpty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -51,7 +53,7 @@ public class Landing {
         //app1Btn action
         app1Btn.setOnAction(e -> {
             //check if there is a tree
-            //todo connect to 2nd question
+            //todo connect to 1nd question
         });
 
 
@@ -77,11 +79,11 @@ public class Landing {
 
         //app2Btn action
         app2Btn.setOnAction(e -> {
-            Tree2 tree = readTree2();
+            Tree2 tree = this.readTree2();
             if (tree == null) {
                 new TreeEmpty();
             } else {
-                new GeneralTreeEdit(tree);
+                new GeneralTreeEdit(tree, false);
             }
         });
 

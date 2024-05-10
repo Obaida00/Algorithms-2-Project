@@ -1,0 +1,3 @@
+A -> B, C, D,z,x,a,q,w
+B -> E, F.t
+F -> G, K, L, M

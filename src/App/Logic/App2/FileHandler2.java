@@ -34,7 +34,7 @@ public class FileHandler2 {
     }
 
     // reads a single line from the input file and returns it as a string
-    private String readLineToStirng() {
+    private String readLineToString() {
         String line = null;
         try {
             line = reader.readLine();
@@ -47,7 +47,7 @@ public class FileHandler2 {
     // reads a single line from the input and returns it as an array containing ONLY
     // alphabiticals
     public ArrayList<Character> readLineToCharList() {
-        String line = this.readLineToStirng();
+        String line = this.readLineToString();
         ArrayList<Character> charList = new ArrayList<>();
 
         if (line != null) {
@@ -77,8 +77,9 @@ public class FileHandler2 {
     // eg. A -> B, C, D
     // C -> E, G
     public boolean saveGeneralTreeToFile(GeneralNode2 root) {
+        this.clear();
         Queue<GeneralNode2> queue = new LinkedList<>();
-        if(root == null)
+        if (root == null)
             return false;
         queue.add(root);
 
@@ -88,7 +89,7 @@ public class FileHandler2 {
             if (!current.hasChild())
                 continue;
 
-            line.append(current.value + " -> ");
+            line.append(current.value).append(" -> ");
 
             boolean firstChild = true;
             int childCount = current.children.size();
@@ -124,8 +125,9 @@ public class FileHandler2 {
     // eg. A -> B, C, D
     // C -> E, G
     public boolean saveBinaryTreeToFile(BinaryNode2 root) {
+        this.clear();
         Queue<BinaryNode2> queue = new LinkedList<>();
-        if(root == null)
+        if (root == null)
             return false;
         queue.add(root);
 
@@ -135,15 +137,15 @@ public class FileHandler2 {
             if (current.left == null && current.right == null)
                 continue;
 
-            line.append(current.value + " -> ");
+            line.append(current.value).append(" -> ");
 
             if (current.left == null) {
                 line.append("null,");
             } else {
-                line.append(current.left.value + ", ");
+                line.append(current.left.value).append(", ");
                 queue.add(current.left);
             }
-            
+
             if (current.right == null) {
                 line.append("null");
             } else {
@@ -156,11 +158,20 @@ public class FileHandler2 {
         return true;
     }
 
-    // loads a tree form the input file with the correct formatting and converts it to a Tree instence
+    private void clear() {
+        try {
+            this.writer = new BufferedWriter(new FileWriter(this.outputFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // loads a tree form the input file with the correct formatting and converts it to a Tree instance
     public Tree2 loadTree() {
+        this.resetReader();
         Tree2 tree = null;
         ArrayList<Character> line;
-        while ((line = this.readLineToCharList()).size() > 0) {
+        while (!(line = this.readLineToCharList()).isEmpty()) {
             GeneralNode2 newNode = Tree2.convertCharListToNode(line);
             if (tree == null) {
                 tree = new Tree2(newNode);// for now.. the nodes are given in order
@@ -168,6 +179,34 @@ public class FileHandler2 {
             tree.findGeneralNode(newNode).children = newNode.children;
         }
         return tree;
+    }
+
+    private void resetReader() {
+        try {
+            this.reader = new BufferedReader(new FileReader(this.inputFile));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void migrateOutput() {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.outputFile));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(this.inputFile));
+
+            //... Loop as long as there are input lines.
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();   // Write system dependent end of line.
+            }
+
+            //... Close reader and writer.
+            bufferedReader.close();  // Close to unlock.
+            bufferedWriter.close();  // Close to unlock and flush to disk.
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // closes the opening reading/writing streams
