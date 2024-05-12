@@ -1,3 +1,4 @@
+package App2;
 import java.util.ArrayList;
 
 public class GeneralNode extends TreeNode {

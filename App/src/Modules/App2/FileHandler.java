@@ -1,4 +1,4 @@
-
+package App2;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class FileHandler {
     String inputPath;
     String outputPath;
@@ -18,7 +19,7 @@ public class FileHandler {
     BufferedReader reader;
     BufferedWriter writer;
 
-    FileHandler(String inputPath, String outputPath) {
+    public FileHandler(String inputPath, String outputPath) {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
         inputFile = new File(inputPath);

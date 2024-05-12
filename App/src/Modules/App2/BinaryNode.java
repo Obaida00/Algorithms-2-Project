@@ -1,3 +1,4 @@
+package App2;
 public class BinaryNode extends TreeNode {
     public BinaryNode left;
     public BinaryNode right;
