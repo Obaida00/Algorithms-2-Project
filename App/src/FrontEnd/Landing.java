@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Landing extends Application {
-
+    
     @Override
     public void start(Stage primeStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("one.fxml"));
@@ -17,8 +17,9 @@ public class Landing extends Application {
         primeStage.setScene(scene); 
         primeStage.show();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         launch(args);
+    //   Third.main(args);
     }
     
 }

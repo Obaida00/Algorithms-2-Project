@@ -13,7 +13,6 @@
         {
             "type": "java",
             "name": "Landing",
-            
             "request": "launch",
             "mainClass": "FrontEnd.Landing",
             "projectName": "Algorithms-2-Project_74257e6",

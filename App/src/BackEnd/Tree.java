@@ -1,12 +1,14 @@
+package BackEnd;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Tree {
     public GeneralNode generalRoot;
-    BinaryNode binaryRoot;
+    public BinaryNode binaryRoot;
 
-    Tree(char data) {
+    public Tree(){}
+    public Tree(char data) {
         this.generalRoot = new GeneralNode(data);
     }
 
