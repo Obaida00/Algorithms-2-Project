@@ -1,16 +1,18 @@
 package App2;
 import java.util.ArrayList;
 
-public class GeneralNode extends TreeNode {
-    public ArrayList<GeneralNode> children;
+public class GeneralNode2 extends TreeNode2 {
+    GeneralNode2 parent;
+    public ArrayList<GeneralNode2> children;
 
-    GeneralNode(char value) {
+    GeneralNode2(GeneralNode2 parent, char value) {
+        this.parent = parent;
         this.value = value;
         this.children = new ArrayList<>();
     }
 
     public boolean hasChild() {
-        for (GeneralNode node : this.children) {
+        for (GeneralNode2 node : this.children) {
             if (node != null)
                 return true;
         }
