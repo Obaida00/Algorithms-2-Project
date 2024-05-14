@@ -1,4 +1,5 @@
-package BackEnd;
+
+package BackEnd.App2;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class FileHandling {
+public class FileHandling2 {
     String inputPath;
     String outputPath;
     File inputFile;
@@ -18,7 +19,7 @@ public class FileHandling {
     BufferedReader reader;
     BufferedWriter writer;
 
-    FileHandling(String inputPath, String outputPath) {
+    FileHandling2(String inputPath, String outputPath) {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
         inputFile = new File(inputPath);
@@ -80,15 +81,15 @@ public class FileHandling {
     //
     // eg. A -> B, C, D
     // C -> E, G
-    public boolean saveGeneralTreeToFile(GeneralNode root) {
-        Queue<GeneralNode> queue = new LinkedList<>();
+    public boolean saveGeneralTreeToFile(GeneralNode2 root) {
+        Queue<GeneralNode2> queue = new LinkedList<>();
         if(root == null)
             return false;
         queue.add(root);
 
         while (!queue.isEmpty()) {
             StringBuilder line = new StringBuilder();
-            GeneralNode current = queue.remove();
+            GeneralNode2 current = queue.remove();
             if (!current.hasChild())
                 continue;
 
@@ -98,7 +99,7 @@ public class FileHandling {
             int childCount = current.children.size();
 
             for (int i = 0; i < childCount; i++) {
-                GeneralNode node = current.children.get(i);
+                GeneralNode2 node = current.children.get(i);
                 if (node == null)
                     continue;
 
@@ -118,15 +119,15 @@ public class FileHandling {
     //
     // eg. A -> B, C, D
     // C -> E, G
-    public boolean saveBinaryTreeToFile(BinaryNode root) {
-        Queue<BinaryNode> queue = new LinkedList<>();
+    public boolean saveBinaryTreeToFile(BinaryNode2 root) {
+        Queue<BinaryNode2> queue = new LinkedList<>();
         if(root == null)
             return false;
         queue.add(root);
 
         while (!queue.isEmpty()) {
             StringBuilder line = new StringBuilder();
-            BinaryNode current = queue.remove();
+            BinaryNode2 current = queue.remove();
             if (current.left == null && current.right == null)
                 continue;
 
@@ -151,13 +152,13 @@ public class FileHandling {
     }
 
     // loads a tree form the input file with the correct formatting and converts it to a Tree instence
-    public Tree loadTree() {
-        Tree tree = null;
+    public Tree2 loadTree() {
+        Tree2 tree = null;
         ArrayList<Character> line;
         while ((line = this.readLineToCharList()).size() > 0) {
-            GeneralNode newNode = Tree.convertCharListToNode(line);
+            GeneralNode2 newNode = Tree2.convertCharListToNode(line);
             if (tree == null) {
-                tree = new Tree(newNode);// for now.. the nodes are given in order
+                tree = new Tree2(newNode);// for now.. the nodes are given in order
             }
             tree.findGeneralNode(newNode).children = newNode.children;
         }

@@ -1,10 +1,7 @@
 
 import java.io.IOException;
 
-import BackEnd.BinaryNode;
-import BackEnd.GeneralNode;
-import BackEnd.Tree;
-import BackEnd.TreeNode;
+import BackEnd.App2.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -31,7 +28,7 @@ public class Third extends Application {
         pane = new Pane();
         Scene scene = new Scene(pane, 600, 600);
         scene.getStylesheets().add(getClass().getResource("css/style.css").toExternalForm());
-        treeDisplay(true);
+        // treeDisplay(true);
         primeStage.setScene(scene);
         primeStage.setTitle("Tree Display");
         primeStage.show();
@@ -46,45 +43,16 @@ public class Third extends Application {
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
     }
 
-    public static void treeDisplay(boolean isBinary) {
-        Tree tree = new Tree();
-        tree.binaryRoot = new BinaryNode('B');
-        
-        tree.binaryRoot.left = new BinaryNode('C');
-        tree.binaryRoot.left.left = new BinaryNode('R');
-        tree.binaryRoot.left.right = new BinaryNode('T');
-        
-        tree.binaryRoot.right = new BinaryNode('D');
-        tree.binaryRoot.right.right = new BinaryNode('E');
-        tree.binaryRoot.right.left = new BinaryNode('F');
+    public static void treeDisplay(Tree2 tree, boolean isBinary) {
 
         if (isBinary) {
-            calCoordinatesBin(tree.binaryRoot, rootX, rootY, 100, 100);
             displayBinary(tree.binaryRoot);
         } else {
             displayGeneral(tree.generalRoot);
         }
     }
-
-    public static void calCoordinatesBin(BinaryNode node, float x, float y, float offsetX, float offsetY) {
-        if (node == null) {
-            return;
-        }
-        // if (offsetY > 50) {
-        // offsetY = 50;
-        // }
-        // if (offsetX > 40) {
-        // offsetX = 40;
-        // }
-        node.x = x;
-        node.y = y;
-
-        calCoordinatesBin(node.left, x - offsetX, y + offsetY, offsetX + 20, offsetY - 25);
-        calCoordinatesBin(node.right, x + offsetX, y + offsetY, offsetX - 20, offsetY - 25);
-    }
-
     
-    public static void displayBinary(BinaryNode binaryRoot) {
+    public static void displayBinary(BinaryNode2 binaryRoot) {
         if (binaryRoot == null) {
             return;
         } else {
@@ -99,10 +67,7 @@ public class Third extends Application {
         }
     }
     
-    public void calCoordinatesGen(GeneralNode node, float x, float y) {
-        // TO DO
-    }
-    public static void displayGeneral(GeneralNode generalRoot) {
+    public static void displayGeneral(GeneralNode2 generalRoot) {
         Third.pane = new AnchorPane();
         if (generalRoot == null) {
             Label label = new Label("There are no nodes in your tree");
