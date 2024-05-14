@@ -12,10 +12,12 @@
         },
         {
             "type": "java",
-            "name": "App",
+            "name": "Landing",
             "request": "launch",
-            "mainClass": "App",
-            "projectName": "Algorithms-2-Project_462d24b7"
+            "mainClass": "RunUI",
+            "projectName": "Algorithms-2-Project_74257e6",
+            "vmArgs": "--module-path C:/Users/talal/Documents/GitHub/Algorithms-2-Project/App/src/JFX-libraries/javafx-sdk-21.0.3/lib --add-modules javafx.controls,javafx.fxml"
+
         }
     ]
 }
