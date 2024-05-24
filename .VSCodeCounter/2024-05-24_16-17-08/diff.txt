@@ -1,0 +1,53 @@
+Date : 2024-05-24 16:17:08
+Directory : f:\REPO\Algorithms-2-Project
+Total : 21 files,  14 codes, 63 comments, 51 blanks, all 128 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |         21 |         14 |         63 |         51 |        128 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                   |         21 |         14 |         63 |         51 |        128 |
+| App                                                                 |         21 |         14 |         63 |         51 |        128 |
+| App\bin                                                             |          4 |       -130 |          0 |          0 |       -130 |
+| App\src                                                             |         17 |        144 |         63 |         51 |        258 |
+| App\src (Files)                                                     |          1 |          7 |          2 |          2 |         11 |
+| App\src\Modules                                                     |         16 |        137 |         61 |         49 |        247 |
+| App\src\Modules (Files)                                             |          6 |       -278 |        -96 |        -83 |       -457 |
+| App\src\Modules\App1                                                |          4 |         86 |         13 |         28 |        127 |
+| App\src\Modules\App2                                                |          6 |        329 |        144 |        104 |        577 |
++---------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                            | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| f:\REPO\Algorithms-2-Project\App\bin\App.class                      | Java     |        -13 |          0 |          0 |        -13 |
+| f:\REPO\Algorithms-2-Project\App\bin\FileHandler.class              | Java     |        -61 |          0 |          0 |        -61 |
+| f:\REPO\Algorithms-2-Project\App\bin\Tree.class                     | Java     |        -27 |          0 |          0 |        -27 |
+| f:\REPO\Algorithms-2-Project\App\bin\TreeNode.class                 | Java     |        -29 |          0 |          0 |        -29 |
+| f:\REPO\Algorithms-2-Project\App\src\App.java                       | Java     |          7 |          2 |          2 |         11 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App.java               | Java     |        -12 |         -1 |         -5 |        -18 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App1\FileHandler1.java | Java     |         53 |         13 |         16 |         82 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App1\RunQ1.java        | Java     |          6 |          0 |          3 |          9 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App1\Tree1.java        | Java     |          7 |          0 |          4 |         11 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App1\TreeNode1.java    | Java     |         20 |          0 |          5 |         25 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App2\BinaryNode2.java  | Java     |         12 |          0 |          2 |         14 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App2\FileHandler2.java | Java     |        140 |         15 |         23 |        178 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App2\GeneralNode2.java | Java     |         18 |          0 |          5 |         23 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App2\RunQ2.java        | Java     |         16 |          2 |          8 |         26 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App2\Tree2.java        | Java     |        137 |        127 |         63 |        327 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\App2\TreeNode2.java    | Java     |          6 |          0 |          3 |          9 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\BinaryNode.java        | Java     |         -9 |          0 |         -2 |        -11 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\FileHandler.java       | Java     |       -133 |        -12 |        -23 |       -168 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\GeneralNode.java       | Java     |        -15 |          0 |         -5 |        -20 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\Tree.java              | Java     |       -106 |        -83 |        -45 |       -234 |
+| f:\REPO\Algorithms-2-Project\App\src\Modules\TreeNode.java          | Java     |         -3 |          0 |         -3 |         -6 |
+| Total                                                               |          |         14 |         63 |         51 |        128 |
++---------------------------------------------------------------------+----------+------------+------------+------------+------------+

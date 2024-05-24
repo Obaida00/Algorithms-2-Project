@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import javax.swing.tree.TreeNode;
-
 public class Tree2 {
     private float offsetX = 20, offsetY = 20;
     public GeneralNode2 generalRoot;

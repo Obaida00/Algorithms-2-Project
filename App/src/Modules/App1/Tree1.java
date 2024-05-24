@@ -5,6 +5,7 @@ public class Tree1 {
 
     public Tree1(TreeNode1 root){
         this.root = root;
+        root.isRoot = true;
     }
 
 }
