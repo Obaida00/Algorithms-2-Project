@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Tree2 {
-    private float offsetX = 20, offsetY = 20;
+    private int NODE_WIDTH;// node width in pixels
+    private int VERTICAL_GAP;// the vertical gap in the visual tree
+    private int HORIZONTAL_GAP;// the horizontal gap in the visual tree
     public GeneralNode2 generalRoot;
     BinaryNode2 binaryRoot;
 
@@ -171,74 +173,8 @@ public class Tree2 {
     // }
     // return false;
     // }
-
-    public void printGeneralTreeToConsole() {
-        this.printGeneralTree(this.generalRoot, "", false);
-    }
-
-    private void printGeneralTree(GeneralNode2 node, String prefix, boolean isLastChild) {
-        if (node == null) {
-            return;
-        }
-
-        StringBuilder sb = new StringBuilder(prefix);
-
-        if (isLastChild) {
-            sb.append("└─ ");
-            prefix += "   ";
-        } else {
-            sb.append("├─ ");
-            prefix += "│  ";
-        }
-
-        sb.append(node.value);
-        System.out.println(sb.toString());
-
-        int numChildren = node.children.size();
-
-        for (int i = 0; i < numChildren; i++) {
-            GeneralNode2 child = node.children.get(i);
-            boolean lastChild = (i == numChildren - 1);
-            printGeneralTree(child, prefix, lastChild);
-        }
-    }
-
     public GeneralNode2 findGeneralNode(GeneralNode2 newNode) {
         return findGeneralNode(this.generalRoot, newNode);
-    }
-
-    public void printBinaryTreeToConsole() {
-        this.printBinaryTree(this.binaryRoot);
-    }
-
-    private void printBinaryTree(BinaryNode2 root) {
-        Queue<BinaryNode2> queue = new LinkedList<>();
-        queue.add(root);
-
-        while (!queue.isEmpty()) {
-            StringBuilder line = new StringBuilder();
-            BinaryNode2 currentNode = queue.remove();
-            if (currentNode.left == null && currentNode.right == null)
-                continue;
-
-            line.append(currentNode.value + " -> ");
-
-            if (currentNode.left == null) {
-                line.append("null,");
-            } else {
-                line.append(currentNode.left.value + ", ");
-                queue.add(currentNode.left);
-            }
-
-            if (currentNode.right == null) {
-                line.append("null");
-            } else {
-                line.append(currentNode.right.value);
-                queue.add(currentNode.right);
-            }
-
-            System.out.println(line.toString());
-        }
     }
 
     private GeneralNode2 findGeneralNode(GeneralNode2 root, GeneralNode2 node) {
@@ -264,61 +200,172 @@ public class Tree2 {
         } else if (!binaryVersion && this.generalRoot != null) {
             fileHandler.saveGeneralTreeToFile(this.generalRoot);
             return true;
-        } else {
-            return false;
         }
+        return false;
 
     }
 
-    // work in progress
-    // public static void calculatePositions(TreeNode root, int x, int y, int level,
-    // int horizontalGap, int verticalGap) {
+    // I am considering the positioning in pixels therefor the parameters are
+    // integers not floats
+    public boolean calculatePositions(int startX, int startY, int nodeWidth, int horizontalGap, int verticalGap,
+            boolean binaryVersion) {
+        this.NODE_WIDTH = nodeWidth;
+        this.HORIZONTAL_GAP = horizontalGap;
+        this.VERTICAL_GAP = verticalGap;
+
+        if (binaryVersion && this.binaryRoot != null) {
+            this.calculateBinaryPositioning(this.binaryRoot, startX, startY);
+            return true;
+        } else if (!binaryVersion && this.generalRoot != null) {
+            // this.calculateGeneralPositioning(this.generalRoot, startX, startY);
+            return true;
+        }
+        return false;
+
+    }
+
+    private void calculateBinaryPositioning(BinaryNode2 root, int x, int y) {
+        if (root == null) {
+            return;
+        }
+
+        // Calculate the positions of the child nodes
+        calculateBinaryPositioning(root.left, x, y + this.VERTICAL_GAP);
+        int leftWidth = 0;
+        if (root.left != null)
+            leftWidth = root.left.width;
+        calculateBinaryPositioning(root.right,
+                x + leftWidth + NODE_WIDTH + /* i think this shouldnt be added */this.HORIZONTAL_GAP,
+                y + this.VERTICAL_GAP);
+
+        // Update the current node's position based on the positions of the child nodes
+        if (root.left != null) {
+            root.x = root.left.x + root.left.width + NODE_WIDTH / 2;
+        } else {
+            root.x = x;
+        }
+        root.y = y;
+
+        // Update the width of the subtree rooted at the current node
+        if (root.left == null && root.right == null) {
+            root.width = NODE_WIDTH;
+        } else if (root.left != null && root.right == null) {
+            root.width = root.left.width + NODE_WIDTH;
+        } else if (root.left == null && root.right != null) {
+            root.width = root.right.width + NODE_WIDTH;
+        } else {
+            root.width = root.left.width + NODE_WIDTH + root.right.width;
+        }
+    }
+
+    // not finished
+    // private void calculateGeneralPositioning(GeneralNode2 root, int x, int y) {
     // if (root == null) {
     // return;
     // }
 
-    // int nodeWidth = 30; // Adjust this value according to the width of your nodes
-
     // // Calculate the positions of the child nodes
-    // calculatePositions(root.left, x, y + verticalGap, level + 1, horizontalGap,
-    // verticalGap);
-    // calculatePositions(root.right, x + root.left.width + nodeWidth +
-    // horizontalGap, y + verticalGap, level + 1, horizontalGap, verticalGap);
 
-    // // Update the current node's position based on the positions of the child
+    // for (int i = 0; i < root.children.size(); i++) {
+    // GeneralNode2 child = root.children.get(i);
+
+    // if (i == 0) {
+    // calculateGeneralPositioning(child, x, y + this.VERTICAL_GAP);
+    // } else {
+    // int leftWidth = root.children.get(i - 1).width;
+    // calculateGeneralPositioning(child,
+    // x + leftWidth + NODE_WIDTH + /* i think this shouldnt be added
+    // */this.HORIZONTAL_GAP,
+    // y + this.VERTICAL_GAP);
+    // }
+    // }
+
+    // // // Update the current node's position based on the positions of the child
     // nodes
-    // if (root.left != null) {
-    // root.x = root.left.x + root.left.width + nodeWidth / 2;
-    // } else {
-    // root.x = x;
-    // }
-    // root.y = y;
+    // // if (root.left != null) {
+    // // root.x = root.left.x + root.left.width + NODE_WIDTH / 2;
+    // // } else {
+    // // root.x = x;
+    // // }
+    // // root.y = y;
 
-    // // Update the width of the subtree rooted at the current node
-    // if (root.left == null && root.right == null) {
-    // root.width = nodeWidth;
-    // } else if (root.left != null && root.right == null) {
-    // root.width = root.left.width + nodeWidth;
-    // } else if (root.left == null && root.right != null) {
-    // root.width = root.right.width + nodeWidth;
-    // } else {
-    // root.width = root.left.width + nodeWidth + root.right.width;
-    // }
-
-    // public void initializeCoordinates(BinaryNode2 node, float x, float y) {
-    // if (node == null) {
-    // return;
-    // }
-    // node.y = y;
-
-    // // if(x - get())
-    // node.x = x;
-
-    // initializeCoordinates(node.left, x - offsetX, y + offsetY);
-    // initializeCoordinates(node.right, x + offsetX, y + offsetY);
+    // // // Update the width of the subtree rooted at the current node
+    // // if (root.left == null && root.right == null) {
+    // // root.width = NODE_WIDTH;
+    // // } else if (root.left != null && root.right == null) {
+    // // root.width = root.left.width + NODE_WIDTH;
+    // // } else if (root.left == null && root.right != null) {
+    // // root.width = root.right.width + NODE_WIDTH;
+    // // } else {
+    // // root.width = root.left.width + NODE_WIDTH + root.right.width;
+    // // }
     // }
 
-    // public void initializeCoordinates(GeneralNode2 node, float x, float y) {
+    // printing to console for debugging perposes
+    public void printGeneralTreeToConsole() {
+        this.printGeneralTree(this.generalRoot, "", false);
+    }
 
-    // }
+    private void printGeneralTree(GeneralNode2 root, String prefix, boolean isLastChild) {
+        if (root == null) {
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder(prefix);
+
+        if (isLastChild) {
+            sb.append("└─ ");
+            prefix += "   ";
+        } else {
+            sb.append("├─ ");
+            prefix += "│  ";
+        }
+
+        sb.append(root.value);
+        sb.append(" [" + root.x + "," + root.y + "] ");
+        System.out.println(sb.toString());
+
+        int numChildren = root.children.size();
+
+        for (int i = 0; i < numChildren; i++) {
+            GeneralNode2 child = root.children.get(i);
+            boolean lastChild = (i == numChildren - 1);
+            printGeneralTree(child, prefix, lastChild);
+        }
+    }
+
+    public void printBinaryTreeToConsole() {
+        this.printBinaryTree(this.binaryRoot);
+    }
+
+    private void printBinaryTree(BinaryNode2 root) {
+        Queue<BinaryNode2> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            StringBuilder line = new StringBuilder();
+            BinaryNode2 currentNode = queue.remove();
+            if (currentNode.left == null && currentNode.right == null)
+                continue;
+
+            line.append(currentNode.value + " [" + currentNode.x + "," + currentNode.y + "] " + " -> ");
+
+            if (currentNode.left == null) {
+                line.append("null,");
+            } else {
+                line.append(currentNode.left.value + ", ");
+                queue.add(currentNode.left);
+            }
+
+            if (currentNode.right == null) {
+                line.append("null");
+            } else {
+                line.append(currentNode.right.value);
+                queue.add(currentNode.right);
+            }
+
+            System.out.println(line.toString());
+        }
+    }
+
 }
