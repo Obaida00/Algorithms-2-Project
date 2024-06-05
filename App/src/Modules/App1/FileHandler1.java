@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class FileHandler1 {
+    int RATIO_DIV = 5;
     String inputPath;
     String outputPath;
     File inputFile;
@@ -57,16 +59,8 @@ public class FileHandler1 {
     // to a Tree instence
     public Tree1 loadTree() {
         String line = this.readLine();
-        var root = load(line);
+        TreeNode1 root = load(line);
         Tree1 tree = new Tree1(root);
-
-        // for (int i = 0; i < line.length(); i++) {
-        // if(line.charAt(i) == '|' || line.charAt(i) == '-'){
-
-        // // this.operandType1(line.substring(0, i), line.substring(i+1));
-        // }
-
-        // }
 
         return tree;
     }
@@ -79,7 +73,6 @@ public class FileHandler1 {
             char c = str.charAt(i);
 
             if (c == '(') {
-                // recursive call for each section
                 Stack<Integer> stack = new Stack<>();
                 stack.push(1);
 
@@ -91,7 +84,7 @@ public class FileHandler1 {
                     if (endc == ')') {
                         stack.pop();
                         if (stack.isEmpty()) {
-                            leftSubNode = load(str.substring(i + 1, end));// shouldnt return
+                            leftSubNode = load(str.substring(i + 1, end));
                             i = end;
                             end = str.length() + 1;
                         }
@@ -101,7 +94,12 @@ public class FileHandler1 {
 
             if (Character.isAlphabetic(c)) {
                 if (leftSubNode == null) {
-                    leftSubNode = new TreeNode1(c, 10, 10);
+                    ArrayList<Integer> dim = getDimensions(str, i);
+                    int width = dim.get(0) / RATIO_DIV;
+                    int height = dim.get(1) / RATIO_DIV;
+
+
+                    leftSubNode = new TreeNode1(c, width, height);
                 }
             }
 
@@ -116,33 +114,71 @@ public class FileHandler1 {
         return leftSubNode;
     }
 
-    // closes the opening reading/writing streams
-    public void close() {
-        try {
-            reader.close();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private ArrayList<Integer> getDimensions(String str, int index) {
+        ArrayList<Integer> dim = new ArrayList<>();
+        int ln = str.length();
+
+        int start;
+        for (start = index; start < ln; start++) {
+            int end = ln;
+            char c = str.charAt(start);
+
+            // sets the value of start to be the index of the first int
+            // its okay to increment the start for the first time because I assigned index
+            // to it, not index+1
+            do {
+                start++;
+                c = str.charAt(start);
+                if (Character.isAlphabetic(c)) {
+                    System.out.println("WARINING: Dimensions are not specified.");
+                }
+            } while (!Character.isDigit(c) && start < end);
+
+            // update end to get the end index for the current int kinda same as start but
+            // inverted conditions
+            end = start;
+            do {
+                end++;
+                c = str.charAt(end);
+            } while (Character.isDigit(c) && end < ln);
+
+            // parse and add the current int
+            // dim.add(Integer.parseInt(str, start, end, 0));
+            dim.add(Integer.parseInt(str.substring(start, end)));
+
+            if (dim.size() == 2)
+                break;
+
         }
+
+        if (dim.size() < 2) {
+            System.out.println("WARINING: Reading less than 2 dimensions.");
+        }
+        return dim;
+
     }
 
-    public void saveTree(Tree1 tree) {
+    public void saveTreeToFileDrawFormatted(TreeNode1 root) {
+        //TODO
+    }
+
+    public void saveTreeToFileLineFormatted(TreeNode1 root) {
         StringBuilder line = new StringBuilder();
-        saveTree(tree.root, line);
+        saveTreeLineFormatted(root, line);
         this.saveLine(line.toString());
     }
 
-    private void saveTree(TreeNode1 root, StringBuilder line) {
+    private void saveTreeLineFormatted(TreeNode1 root, StringBuilder line) {
         if (root == null)
             return;
         if (!root.isRectangle && !root.isRoot)
             line.append('(');
         // visit left
-        saveTree(root.left, line);
+        saveTreeLineFormatted(root.left, line);
 
         // do root
         if (root.isRectangle) {
-            line.append(root.name);
+            line.append(root.value);
             line.append('[');
             line.append(root.width);
             line.append(',');
@@ -154,10 +190,19 @@ public class FileHandler1 {
             line.append(' ');
         }
         // visit right
-        saveTree(root.right, line);
+        saveTreeLineFormatted(root.right, line);
         if (!root.isRectangle && !root.isRoot)
             line.append(')');
 
     }
 
+    // closes the opening reading/writing streams
+    public void close() {
+        try {
+            reader.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
