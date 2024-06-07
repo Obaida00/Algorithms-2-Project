@@ -1,4 +1,4 @@
-package App2;
+package App.Logic.App2;
 import java.util.ArrayList;
 
 public class GeneralNode2 extends TreeNode2 {

@@ -1,4 +1,4 @@
-package App2;
+package App.Logic.App2;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

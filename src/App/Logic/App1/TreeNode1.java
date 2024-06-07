@@ -1,7 +1,7 @@
-package App1;
+package App.Logic.App1;
 
 public class TreeNode1 {
-    boolean isRectangle;
+    boolean isPaper;
     boolean isRoot = false;
     char value;
     int width = 0;
@@ -11,19 +11,19 @@ public class TreeNode1 {
     TreeNode1 left;
 
     public TreeNode1(char value) {
-        this.isRectangle = false;
+        this.isPaper = false;
         this.value = value;
     }
 
     public TreeNode1(char value, int width, int height) {
-        this.isRectangle = true;
+        this.isPaper = true;
         this.value = value;
         this.height = height;
         this.width = width;
     }
 
     public void updateNodeDim() {
-        if (this.isRectangle)
+        if (this.isPaper)
             return;
 
         // there is no need to check if left or right are null because the tree is

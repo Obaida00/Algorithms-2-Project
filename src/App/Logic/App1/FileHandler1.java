@@ -1,4 +1,4 @@
-package App1;
+package App.Logic.App1;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class FileHandler1 {
-    int RATIO_DIV = 5;
+    int RATIO_DIV = 1;
     String inputPath;
     String outputPath;
     File inputFile;
@@ -98,7 +98,6 @@ public class FileHandler1 {
                     int width = dim.get(0) / RATIO_DIV;
                     int height = dim.get(1) / RATIO_DIV;
 
-
                     leftSubNode = new TreeNode1(c, width, height);
                 }
             }
@@ -158,26 +157,44 @@ public class FileHandler1 {
 
     }
 
-    public void saveTreeToFileDrawFormatted(TreeNode1 root) {
-        //TODO
+    public void saveTreeToFileDrawFormatted(Tree1 tree) {
+        if (tree.rootPaper == null) {
+            tree.buildPaper();
+        }
+        var arr = tree.rootPaper;
+
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < tree.height; i++) {
+            for (int j = 0; j < tree.width; j++) {
+                if (arr[i][j] != null) {
+                    str.append(arr[i][j]);
+                }else{
+                    str.append(" ");
+                }
+            }
+            str.append('\n');
+        }
+
+        this.saveLine(str.toString());
     }
 
-    public void saveTreeToFileLineFormatted(TreeNode1 root) {
+    public void saveTreeToFileLineFormatted(Tree1 tree) {
         StringBuilder line = new StringBuilder();
-        saveTreeLineFormatted(root, line);
+        saveTreeLineFormatted(tree.root, line);
         this.saveLine(line.toString());
     }
 
     private void saveTreeLineFormatted(TreeNode1 root, StringBuilder line) {
         if (root == null)
             return;
-        if (!root.isRectangle && !root.isRoot)
+        if (!root.isPaper && !root.isRoot)
             line.append('(');
         // visit left
         saveTreeLineFormatted(root.left, line);
 
         // do root
-        if (root.isRectangle) {
+        if (root.isPaper) {
             line.append(root.value);
             line.append('[');
             line.append(root.width);
@@ -191,7 +208,7 @@ public class FileHandler1 {
         }
         // visit right
         saveTreeLineFormatted(root.right, line);
-        if (!root.isRectangle && !root.isRoot)
+        if (!root.isPaper && !root.isRoot)
             line.append(')');
 
     }

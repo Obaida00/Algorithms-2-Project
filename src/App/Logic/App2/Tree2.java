@@ -1,4 +1,4 @@
-package App2;
+package App.Logic.App2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

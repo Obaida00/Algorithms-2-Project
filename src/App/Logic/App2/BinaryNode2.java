@@ -1,4 +1,4 @@
-package App2;
+package App.Logic.App2;
 public class BinaryNode2 extends TreeNode2 {
     public BinaryNode2 parent;
     public BinaryNode2 left;
