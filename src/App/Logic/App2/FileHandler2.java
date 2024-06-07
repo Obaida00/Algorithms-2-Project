@@ -1,11 +1,6 @@
 package App.Logic.App2;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -112,7 +107,16 @@ public class FileHandler2 {
             }
             saveLine(line.toString());
         }
+        this.flush();
         return true;
+    }
+
+    private void flush() {
+        try {
+            writer.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // saves the Binary tree to the output file with the required formatting: root -> ch1, ch2, ch3 and returns if the process is succeeded
@@ -148,6 +152,7 @@ public class FileHandler2 {
             }
             saveLine(line.toString());
         }
+        this.flush();
         return true;
     }
 

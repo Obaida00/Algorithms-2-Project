@@ -6,7 +6,7 @@ public class GeneralNode2 extends TreeNode2 {
     public ArrayList<GeneralNode2> children;
     public int width;
 
-    GeneralNode2(GeneralNode2 parent, char value) {
+    public GeneralNode2(GeneralNode2 parent, char value) {
         this.parent = parent;
         this.value = value;
         this.children = new ArrayList<>();

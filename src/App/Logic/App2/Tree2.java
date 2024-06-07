@@ -11,18 +11,18 @@ public class Tree2 {
     public GeneralNode2 generalRoot;
     BinaryNode2 binaryRoot;
 
-    Tree2(char data) {
+    public Tree2(char data) {
         this.generalRoot = new GeneralNode2(null, data);
     }
 
-    Tree2(GeneralNode2 root) {
+    public Tree2(GeneralNode2 root) {
         this.generalRoot = root;
     }
 
     // converts from List format: A,B,C,D to a node with the root as A and the
     // children as the rest
     public static GeneralNode2 convertCharListToNode(ArrayList<Character> arr) {
-        GeneralNode2 root = new GeneralNode2(null, arr.get(0));
+        GeneralNode2 root = new GeneralNode2(null, arr.getFirst());
         for (int i = 1; i < arr.size(); i++) {
             GeneralNode2 child = new GeneralNode2(root, arr.get(i));
             root.children.add(child);
@@ -208,7 +208,7 @@ public class Tree2 {
     // I am considering the positioning in pixels therefor the parameters are
     // integers not floats
     public boolean calculatePositions(int startX, int startY, int nodeWidth, int horizontalGap, int verticalGap,
-            boolean binaryVersion) {
+                                      boolean binaryVersion) {
         this.NODE_WIDTH = nodeWidth;
         this.HORIZONTAL_GAP = horizontalGap;
         this.VERTICAL_GAP = verticalGap;
