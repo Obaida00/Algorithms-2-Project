@@ -1,6 +1,5 @@
 package App.UI.App1;
 
-import App.Logic.App1.Tree1;
 import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -41,7 +40,7 @@ public class TreeEmpty1 {
             add_node.setCursor(Cursor.DEFAULT);
         });
         add_node.setOnAction(e ->{
-            new addNodePopup();
+            new addNodeTreeEmpty1();
         });
 
         Button close=new Button("Close");

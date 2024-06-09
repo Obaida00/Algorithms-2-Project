@@ -3,6 +3,9 @@ package App.Logic.App1;
 import App.Logic.App2.BinaryNode2;
 import App.Logic.App2.GeneralNode2;
 
+import javax.swing.tree.TreeNode;
+import java.util.ArrayList;
+
 public class Tree1 {
     private int NODE_WIDTH;// node width in pixels
     private int VERTICAL_GAP;// the vertical gap in the visual tree
@@ -12,6 +15,7 @@ public class Tree1 {
     public String[][] rootPaper;
     int width;
     int height;
+    private int niceFormationsCount;
 
     public Tree1(TreeNode1 root) {
         this.root = root;
@@ -51,19 +55,19 @@ public class Tree1 {
 
 
         if (root.isPaper) {
-            
-        }else if(root.value == '-'){
+
+        } else if (root.value == '-') {
             for (int i = x; i < root.width; i++) {
-                this.rootPaper[x][y+root.left.height] = "-";
+                this.rootPaper[x][y + root.left.height] = "-";
             }
             buildArrayListPaper(root.left, x, y);
-            buildArrayListPaper(root.right, x, y+root.left.height);
-        }else if(root.value == '|'){
+            buildArrayListPaper(root.right, x, y + root.left.height);
+        } else if (root.value == '|') {
             for (int i = y; i < root.height; i++) {
-                this.rootPaper[x+root.left.width][y] = "|";
+                this.rootPaper[x + root.left.width][y] = "|";
             }
             buildArrayListPaper(root.left, x, y);
-            buildArrayListPaper(root.right, x+root.left.width, y);
+            buildArrayListPaper(root.right, x + root.left.width, y);
         }
     }
 
@@ -72,7 +76,7 @@ public class Tree1 {
         this.HORIZONTAL_GAP = horizontalGap;
         this.VERTICAL_GAP = verticalGap;
 
-        if(this.root == null)
+        if (this.root == null)
             return false;
 
         this.calculateBinaryPositioning(this.root, startX, startY);

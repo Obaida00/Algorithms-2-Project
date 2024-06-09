@@ -5,7 +5,7 @@ import App.Logic.App2.Tree2;
 import App.UI.App1.BinaryTree1;
 import App.UI.App1.TreeEmpty1;
 import App.UI.App2.GeneralTreeEdit;
-import App.UI.App2.TreeEmpty;
+import App.UI.App2.TreeEmpty2;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -21,7 +21,7 @@ public class Landing {
     public Landing() {
         //initialize the root and scene
         Group root = new Group();
-        Scene scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
+        Scene scene = new Scene(root, 500, 350, Color.valueOf("white"));
 
 
         //set and style the welcomeTxt text
@@ -87,7 +87,7 @@ public class Landing {
         app2Btn.setOnAction(e -> {
             Tree2 tree = this.readTree2();
             if (tree == null) {
-                new TreeEmpty();
+                new TreeEmpty2();
             } else {
                 new GeneralTreeEdit(tree, false);
             }

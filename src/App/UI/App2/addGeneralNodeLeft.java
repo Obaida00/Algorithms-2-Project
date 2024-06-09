@@ -1,7 +1,7 @@
 package App.UI.App2;
 
+import App.Logic.App2.BinaryNode2;
 import App.Logic.App2.GeneralNode2;
-import App.Logic.App2.Tree2;
 import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -14,11 +14,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class addNodePopup {
+public class addGeneralNodeLeft {
     Scene scene;
     private String nodeValue;
 
-    public addNodePopup() {
+    public addGeneralNodeLeft(GeneralNode2 node) {
         //Pane root = new Pane();
         //initialize the root and scene
         Group root = new Group();
@@ -94,10 +94,9 @@ public class addNodePopup {
             if (input.length() > 1 || !Character.isAlphabetic(input.charAt(0))) {
                 System.out.println("only characters are allowed");
             } else {
-                Tree2 tree = new Tree2(input.charAt(0));
-                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
-                new GeneralTreeEdit(tree, true);
+                node.children.addFirst(new GeneralNode2(node, input.charAt(0)));
             }
+            RunUI.goBack();
         });
 
 
