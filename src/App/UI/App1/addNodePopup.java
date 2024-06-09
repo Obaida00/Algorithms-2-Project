@@ -57,13 +57,13 @@ public class addNodePopup {
             RunUI.goBack();
         });
 
-        Button add = new Button("Add");
+        Button add=new Button("Add");
         add.setLayoutX(176);
         add.setLayoutY(120);
-        add.setPrefSize(50, 20);
+        add.setPrefSize(50,20);
         add.setStyle("-fx-background-color:#023E8A; -fx-text-fill:#CAF0F8");
         root.getChildren().add(add);
-        DropShadow shadow2 = new DropShadow();
+        DropShadow shadow2 =new DropShadow();
 
         add.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
             add.setEffect(shadow2);

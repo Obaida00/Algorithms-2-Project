@@ -11,4 +11,15 @@ public class BinaryNode2 extends TreeNode2 {
         left = null;
         right = null;
     }
+
+    public void delete() {
+        if(this.parent!=null){
+            if(this.parent.left==this){
+                this.parent.left=null;
+            }else if (this.parent.right==this){
+                this.parent.right=null;
+            }
+
+        }
+    }
 }

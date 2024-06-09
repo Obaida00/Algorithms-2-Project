@@ -20,4 +20,12 @@ public class GeneralNode2 extends TreeNode2 {
         return false;
     }
 
+
+    public void delete() {
+        if(this.parent != null)
+            this.parent.children.remove(this);
+    }
+
+
+
 }
