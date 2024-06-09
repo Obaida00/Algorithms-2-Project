@@ -7,7 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -17,11 +19,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 
-import static java.nio.file.Files.delete;
-
 public class binaryTreeEdit {
     private static final int START_DRAWING_Y = 30;
-    private static final int START_DRAWING_X = 540;
+    private static final int START_DRAWING_X = 250;
     private static int NODE_WIDTH = 20;
     private static int MIN_NODE_WIDTH = 10;
     private static final int HORIZONTAL_GAP = 30;
@@ -41,9 +41,8 @@ public class binaryTreeEdit {
         BorderPane root = new BorderPane();
         this.visualPane = new Pane();
         HBox buttonBox = new HBox(10);
-        buttonBox.setStyle("-fx-padding:10");
         buttonBox.setAlignment(Pos.CENTER_RIGHT);
-        scene = new Scene(root, 1080, 650, Color.valueOf("white"));
+        scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
 //        buttonBox.setStyle("-fx-background-color:white; -fx-margin-right:50px");
 
         scene.widthProperty().addListener((obs, oldVal, newVal) -> drawTree());
@@ -55,61 +54,40 @@ public class binaryTreeEdit {
         root.setBottom(buttonBox);
 
         //set and style the closeBtn
-        Button closebtn = new Button("Close");
-        closebtn.setLayoutX(1);
-        closebtn.setLayoutY(300);
-        closebtn.setBackground(null);
-        closebtn.setPrefSize(100, 20);
-        closebtn.setUnderline(true);
-        closebtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
-        closebtn.setFont(Font.font("system ui", 15));
-        closebtn.setTooltip(new Tooltip("close"));
-        buttonBox.getChildren().add(closebtn);
+        Button closeBtn = new Button("X");
+        closeBtn.setLayoutX(460);
+        closeBtn.setLayoutY(10);
+        closeBtn.setBackground(null);
+        closeBtn.setPrefSize(10, 20);
+        closeBtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
+        closeBtn.setFont(Font.font("system ui", 15));
+        closeBtn.setTooltip(new Tooltip("close"));
+        buttonBox.getChildren().add(closeBtn);
         DropShadow shadow = new DropShadow();
 
         //closeBtn hover effect
-        closebtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-            closebtn.setEffect(shadow);
-            closebtn.setCursor(Cursor.HAND);
+        closeBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            closeBtn.setEffect(shadow);
+            closeBtn.setCursor(Cursor.HAND);
         });
 
-        closebtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-            closebtn.setEffect(null);
-            closebtn.setCursor(Cursor.DEFAULT);
+        closeBtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+            closeBtn.setEffect(null);
+            closeBtn.setCursor(Cursor.DEFAULT);
         });
 
         //closeBtn action
-        closebtn.setOnAction(e -> {
+        closeBtn.setOnAction(e -> {
             this.saveTree();
-            RunUI.close();
-        });
-        Button refreshbtn = new Button("Refresh");
-        refreshbtn.setLayoutX(170);
-        refreshbtn.setLayoutY(300);
-        refreshbtn.setPrefSize(50, 20);
-        refreshbtn.setStyle("-fx-background-color:null; -fx-border-color:green; -fx-text-fill:green; -fx-border-radius:3");
-        buttonBox.getChildren().add(refreshbtn);
-        DropShadow shadow3 = new DropShadow();
-
-        //saveBtn hover effect
-        refreshbtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-            refreshbtn.setEffect(shadow3);
-            refreshbtn.setCursor(Cursor.HAND);
+            RunUI.goBack();
         });
 
-        refreshbtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-            refreshbtn.setEffect(null);
-            refreshbtn.setCursor(Cursor.DEFAULT);
-        });
-        refreshbtn.setOnAction(event ->{
-            //todo
-        });
         //set and style the saveBtn
         Button saveBtn = new Button("Save");
         saveBtn.setLayoutX(220);
         saveBtn.setLayoutY(300);
         saveBtn.setPrefSize(50, 20);
-        saveBtn.setStyle("-fx-background-color:null; -fx-border-color:green; -fx-text-fill:green;-fx-border-radius:3");
+        saveBtn.setStyle("-fx-background-color:null; -fx-border-color:green; -fx-text-fill:green");
         buttonBox.getChildren().add(saveBtn);
         DropShadow shadow1 = new DropShadow();
 
@@ -124,7 +102,7 @@ public class binaryTreeEdit {
             saveBtn.setCursor(Cursor.DEFAULT);
         });
 
-        //todo saveBtn action
+
         saveBtn.setOnAction(e -> {
             this.saveTree();
         });
@@ -194,33 +172,11 @@ public class binaryTreeEdit {
 
 
         Circle circle = new Circle(root.x, root.y, NODE_WIDTH);
-        circle.setFill(Paint.valueOf("#023E8A"));
-
-        //// Circle circle1 = new Circle(root.x, root.y, NODE_WIDTH - 2);
-        //circle1.setFill(Paint.valueOf("white"));
+        Circle circle1 = new Circle(root.x, root.y, NODE_WIDTH - 2);
+        circle1.setFill(Paint.valueOf("white"));
         Label label = new Label(Character.toString(root.value));
         label.setLayoutX(root.x - 3);
         label.setLayoutY(root.y - 10);
-        label.setStyle("-fx-background-color:#023E8A ;-fx-text-fill:#CAF0F8");
-        ContextMenu cm=new ContextMenu();
-        MenuItem addLeft=new MenuItem("Add left node");
-        MenuItem addRight=new MenuItem("Add right node");
-        MenuItem delete=new MenuItem("Delete node");
-        label.setContextMenu(cm);
-        cm.getItems().addAll(addRight,addLeft,delete);
-
-        addLeft.setOnAction(event ->{
-            addLeft(root);
-
-        });
-
-        addRight.setOnAction(event ->{
-            addRight(root);
-
-        });
-        delete.setOnAction(event ->{
-            delete(root);
-        });
 
         Line line = null;
         if (root.parent != null) {
@@ -228,7 +184,7 @@ public class binaryTreeEdit {
             this.visualPane.getChildren().addFirst(line);
         }
 
-        this.visualPane.getChildren().addAll(circle, label);
+        this.visualPane.getChildren().addAll(circle, circle1, label);
 
 
         if ((root.x + NODE_WIDTH > this.scene.getWidth() ||
@@ -240,16 +196,6 @@ public class binaryTreeEdit {
             drawNode(root.left);
             drawNode(root.right);
         }
-    }
-
-    private void delete(BinaryNode2 root) {
-    }
-
-    private void addRight(BinaryNode2 root) {
-    }
-
-    private void addLeft(BinaryNode2 root) {
-
     }
 
 

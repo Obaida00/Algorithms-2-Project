@@ -2,10 +2,10 @@ package App.UI;
 
 import App.Logic.App1.Tree1;
 import App.Logic.App2.Tree2;
+import App.UI.App1.BinaryTree1;
 import App.UI.App1.TreeEmpty1;
 import App.UI.App2.GeneralTreeEdit;
 import App.UI.App2.TreeEmpty;
-import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -15,14 +15,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class Landing {
 
     public Landing() {
         //initialize the root and scene
         Group root = new Group();
-        Scene scene = new Scene(root, 500, 350, Color.valueOf("white"));
+        Scene scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
 
 
         //set and style the welcomeTxt text
@@ -38,7 +37,7 @@ public class Landing {
         app1Btn.setLayoutX(170);
         app1Btn.setLayoutY(150);
         app1Btn.setPrefSize(177, 35);
-        app1Btn.setStyle("-fx-background-color:#023E8A; -fx-text-fill:#CAF0F8;  -fx-border-radius:30");
+        app1Btn.setStyle("-fx-background-color:#023E8A; -fx-text-fill:#CAF0F8");
         root.getChildren().add(app1Btn);
         DropShadow shadow1 = new DropShadow();
 
@@ -55,8 +54,12 @@ public class Landing {
 
         //app1Btn action
         app1Btn.setOnAction(e -> {
-            //check if there is a tree
-            new TreeEmpty1();
+            Tree1 tree = this.readTree1();
+            if (tree == null) {
+                new TreeEmpty1();
+            } else {
+                new BinaryTree1(tree, false);
+            }
         });
 
 
@@ -65,7 +68,7 @@ public class Landing {
         app2Btn.setLayoutX(170);
         app2Btn.setLayoutY(200);
         app2Btn.setPrefSize(177, 35);
-        app2Btn.setStyle("-fx-background-color:#023E8A; -fx-text-fill:#CAF0F8;  -fx-border-radius:30");
+        app2Btn.setStyle("-fx-background-color:#023E8A; -fx-text-fill:#CAF0F8");
         root.getChildren().add(app2Btn);
         DropShadow shadow2 = new DropShadow();
 
@@ -116,20 +119,13 @@ public class Landing {
         closeBtn.setOnAction(e -> {
             RunUI.close();
         });
-      /*  Button fullScreenbtn=new Button("full Screen");
-        root.getChildren().add(fullScreenbtn);
-        fullScreenbtn.setOnAction(event ->{
-            RunUI.setFullScreen(true);
-
-        });*/
 
 
         RunUI.setScene(scene, true);
     }
 
     private Tree1 readTree1() {
-//        return RunUI.fileHandler1.loadTree();
-        return new Tree1(null);
+        return RunUI.fileHandler1.loadTree();
     }
 
     private Tree2 readTree2() {

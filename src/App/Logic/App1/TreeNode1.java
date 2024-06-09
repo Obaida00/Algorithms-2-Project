@@ -1,21 +1,27 @@
 package App.Logic.App1;
 
 public class TreeNode1 {
+    public TreeNode1 parent;
     boolean isPaper;
     boolean isRoot = false;
-    char value;
-    int width = 0;
+    public char value;
+    public int width = 0;
     int height = 0;
 
-    TreeNode1 right;
-    TreeNode1 left;
+    public int x;
+    public int y;
 
-    public TreeNode1(char value) {
+    public TreeNode1 right;
+    public TreeNode1 left;
+
+    public TreeNode1(TreeNode1 parent, char value) {
+        this.parent = parent;
         this.isPaper = false;
         this.value = value;
     }
 
-    public TreeNode1(char value, int width, int height) {
+    public TreeNode1(TreeNode1 parent, char value, int width, int height) {
+        this.parent = parent;
         this.isPaper = true;
         this.value = value;
         this.height = height;

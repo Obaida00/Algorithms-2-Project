@@ -363,7 +363,8 @@ public class Tree2 {
 
     private void printBinaryTree(BinaryNode2 root) {
         Queue<BinaryNode2> queue = new LinkedList<>();
-        queue.add(root);
+        if (root != null)
+            queue.add(root);
 
         while (!queue.isEmpty()) {
             StringBuilder line = new StringBuilder();
@@ -391,4 +392,42 @@ public class Tree2 {
         }
     }
 
+    public void test(GeneralNode2 root, int x, int y) {
+        if (root == null) {
+            return;
+        }
+
+        // Calculate the positions of the child nodes
+        if (!root.children.isEmpty())
+            test(root.children.getFirst(), x, y + this.VERTICAL_GAP);
+        for (int i = 1; i < root.children.size(); i++) {
+            int leftWidth = 0;
+            if (root.children.get(i - 1) != null) {
+                leftWidth = root.children.get(i - 1).width;
+            }
+            test(root.children.get(i),
+                    x + leftWidth + NODE_WIDTH + /* i think this shouldnt be added */this.HORIZONTAL_GAP,
+                    y + this.VERTICAL_GAP);
+
+        }
+
+
+        // Update the current node's position based on the positions of the child nodes
+        if (!root.children.isEmpty()) {
+            root.x = NODE_WIDTH / 2;
+            for (int i = 0; i < root.children.size(); i++) {
+                root.x += root.children.get(i).width;
+            }
+        } else {
+            root.x = x;
+        }
+        root.y = y;
+
+
+        // Update the width of the subtree rooted at the current node\
+        root.width = this.NODE_WIDTH;
+        for (int i = 0; i < root.children.size(); i++) {
+            root.width += root.children.get(i).width;
+        }
+    }
 }

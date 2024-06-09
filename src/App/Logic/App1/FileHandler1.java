@@ -41,7 +41,11 @@ public class FileHandler1 {
     // reads a single line from the input file and returns it as a string
     private String readLine() {
         String line = null;
-        line = reader.nextLine();
+        try {
+            line = reader.nextLine();
+        } catch (Exception e) {
+            System.out.println("no line to read from input file");
+        }
         return line;
     }
 
@@ -57,15 +61,23 @@ public class FileHandler1 {
 
     // loads a tree form the input file with the correct formatting and converts it
     // to a Tree instence
-    public Tree1 loadTree() {
-        String line = this.readLine();
-        TreeNode1 root = load(line);
-        Tree1 tree = new Tree1(root);
-
-        return tree;
+    public Tree1 loadTree(String line) {
+        TreeNode1 root = load(null, line);
+        return new Tree1(root);
     }
 
-    TreeNode1 load(String str) {
+    public Tree1 loadTree() {
+        String line = this.readLine();
+        TreeNode1 root = load(null, line);
+        if (root != null)
+            return new Tree1(root);
+        return null;
+    }
+
+    private TreeNode1 load(TreeNode1 parent, String str) {
+        if (str == null) {
+            return null;
+        }
         TreeNode1 root = null;
         TreeNode1 leftSubNode = null;
 
@@ -84,7 +96,7 @@ public class FileHandler1 {
                     if (endc == ')') {
                         stack.pop();
                         if (stack.isEmpty()) {
-                            leftSubNode = load(str.substring(i + 1, end));
+                            leftSubNode = load(root, str.substring(i + 1, end));
                             i = end;
                             end = str.length() + 1;
                         }
@@ -98,15 +110,19 @@ public class FileHandler1 {
                     int width = dim.get(0) / RATIO_DIV;
                     int height = dim.get(1) / RATIO_DIV;
 
-                    leftSubNode = new TreeNode1(c, width, height);
+                    leftSubNode = new TreeNode1(root, c, width, height);
                 }
             }
 
             if (c == '|' || c == '-') {
-                root = new TreeNode1(c);
-                if (leftSubNode != null)
+                root = new TreeNode1(null, c);
+                if (leftSubNode != null){
+                    leftSubNode.parent = root;
                     root.left = leftSubNode;
-                root.right = load(str.substring(i + 1));
+                }
+
+                root.right = load(null, str.substring(i + 1));
+                root.right.parent = root;
                 return root;
             }
         }
@@ -169,7 +185,7 @@ public class FileHandler1 {
             for (int j = 0; j < tree.width; j++) {
                 if (arr[i][j] != null) {
                     str.append(arr[i][j]);
-                }else{
+                } else {
                     str.append(" ");
                 }
             }

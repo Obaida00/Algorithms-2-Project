@@ -1,6 +1,7 @@
 package App.UI;
 
 import App.App;
+import App.Logic.App1.FileHandler1;
 import App.Logic.App2.FileHandler2;
 import App.UI.Landing;
 import javafx.scene.Scene;
@@ -13,14 +14,14 @@ public class RunUI {
     static Stage window;
     private static Stack<Scene> callStack;
     public static FileHandler2 fileHandler2;
-//    public static FileHandler1 fileHandler1;
+    public static FileHandler1 fileHandler1;
 
     //    static{
 //        //todo make the close buttons global here
 //    }
     public static void run(Stage stage) {
         callStack = new Stack<>();
-//        initApp1();
+        initApp1();
         initApp2();
         initWindow(stage);
         new Landing();
@@ -56,14 +57,14 @@ public class RunUI {
     }
 
     private static void initApp1() {
-        //todo initApp2
+        fileHandler1 = new FileHandler1(App.input1, App.output1);
     }
 
     private static void initApp2() {
         fileHandler2 = new FileHandler2(App.input2, App.output2);
     }
 
-    public static void migrateOutput(){
+    public static void migrateOutput() {
         fileHandler2.migrateOutput();
     }
 

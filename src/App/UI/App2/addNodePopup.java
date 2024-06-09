@@ -2,9 +2,7 @@ package App.UI.App2;
 
 import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
-import App.UI.App2.GeneralTreeEdit;
 import App.UI.RunUI;
-import App.Logic.App2.GeneralNode2;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -24,7 +22,7 @@ public class addNodePopup {
         //Pane root = new Pane();
         //initialize the root and scene
         Group root = new Group();
-        Scene scene = new Scene(root, 300, 170, Color.valueOf("white"));
+        Scene scene = new Scene(root, 300, 170, Color.valueOf("#CAF0F8"));
 
         //set and style the addBtn a value text
         Text addValTxt = new Text("Add a value for the node:");
@@ -40,7 +38,7 @@ public class addNodePopup {
         addValue.setLayoutX(66);
         addValue.setLayoutY(70);
         addValue.setPrefSize(170, 25);
-        addValue.setStyle("-fx-background-color:null; -fx-border-color:#03045E; -fx-text-fill:#03045E;  -fx-border-radius:3");
+        addValue.setStyle("-fx-background-color:null; -fx-border-color:#03045E; -fx-text-fill:#03045E");
         root.getChildren().add(addValue);
 
         //set and style the cancelBtn
@@ -71,7 +69,7 @@ public class addNodePopup {
 
         //set and style the addBtn
         Button addBtn = new Button("Add");
-        addBtn.setLayoutX(180);
+        addBtn.setLayoutX(176);
         addBtn.setLayoutY(120);
         addBtn.setPrefSize(50, 20);
         addBtn.setStyle("-fx-background-color:#023E8A; -fx-text-fill:#CAF0F8");
@@ -93,7 +91,7 @@ public class addNodePopup {
         addBtn.setOnAction(e -> {
             String input = addValue.getText();
             if (input.length() > 1 || !Character.isAlphabetic(input.charAt(0))) {
-                //todo output error msg <only characters are allowed>
+                System.out.println("only characters are allowed");
             } else {
                 Tree2 tree = new Tree2(input.charAt(0));
 //                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
@@ -101,7 +99,21 @@ public class addNodePopup {
             }
         });
 
+       /*
+       Label label=new Label();
+        root.getChildren().addBtn(label);
+        addBtn.setOnMouseClicked(event ->{
+            double x=event.getX();
+            double y=event.getY();
 
+            Circle circle=new Circle(x,y,50);
+            circle.setFill(Color.valueOf("#03045E"));
+            root.getChildren().addBtn(circle);
+            label.setLayoutX(x - 25);
+            label.setLayoutY(y - 10);
+            label.setText("node value");
+        });
+        */
 
 
         //todo convert to a popup, you will need line 23 & 68
