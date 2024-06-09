@@ -154,7 +154,6 @@ public class FileHandler2 {
             }
             saveLine(line.toString());
         }
-        this.flush();
         return true;
     }
 

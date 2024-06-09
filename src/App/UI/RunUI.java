@@ -55,7 +55,7 @@ public class RunUI {
     }
 
     private static void initApp1() {
-        //todo initApp1
+        //todo initApp2
     }
 
     private static void initApp2() {

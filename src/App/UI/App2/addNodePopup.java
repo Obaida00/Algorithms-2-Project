@@ -94,7 +94,7 @@ public class addNodePopup {
                 //todo output error msg <only characters are allowed>
             } else {
                 Tree2 tree = new Tree2(input.charAt(0));
-                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
+//                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
                 new GeneralTreeEdit(tree, true);
             }
         });
