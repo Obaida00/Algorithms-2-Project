@@ -36,10 +36,11 @@ public class addNodePopup {
         root.getChildren().add(addValTxt);
 
         //set and style the addVal text field
-        TextField addValue = new TextField("Enter a value:");
+        TextField addValue = new TextField("Enter a value :");
         addValue.setLayoutX(66);
         addValue.setLayoutY(70);
         addValue.setPrefSize(170, 25);
+        addValue.selectAll();
         addValue.setStyle("-fx-background-color:null; -fx-border-color:#03045E; -fx-text-fill:#03045E;  -fx-border-radius:3");
         root.getChildren().add(addValue);
 
@@ -96,7 +97,7 @@ public class addNodePopup {
                 //todo output error msg <only characters are allowed>
             } else {
                 Tree2 tree = new Tree2(input.charAt(0));
-//                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
+                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
                 new GeneralTreeEdit(tree, true);
             }
         });

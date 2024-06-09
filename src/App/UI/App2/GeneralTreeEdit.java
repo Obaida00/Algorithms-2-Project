@@ -5,6 +5,7 @@ import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
 import App.UI.App2.binaryTreeEdit;
 import App.UI.RunUI;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -70,6 +71,7 @@ public class GeneralTreeEdit {
         closeBtn.setFont(Font.font("system ui", 15));
         closeBtn.setTooltip(new Tooltip("close"));
         buttonBox.getChildren().add(closeBtn);
+        HBox.setMargin(closeBtn,new Insets(0 ,600, 0 ,0));
         DropShadow shadow = new DropShadow();
 
         //closeBtn hover effect
@@ -92,7 +94,7 @@ public class GeneralTreeEdit {
         Button refreshbtn = new Button("Refresh");
         refreshbtn.setLayoutX(170);
         refreshbtn.setLayoutY(300);
-        refreshbtn.setPrefSize(50, 20);
+        refreshbtn.setPrefSize(70, 20);
         refreshbtn.setStyle("-fx-background-color:null; -fx-border-color:green; -fx-text-fill:green; -fx-border-radius:3");
         buttonBox.getChildren().add(refreshbtn);
         DropShadow shadow3 = new DropShadow();
@@ -108,7 +110,7 @@ public class GeneralTreeEdit {
             refreshbtn.setCursor(Cursor.DEFAULT);
         });
         refreshbtn.setOnAction(event ->{
-            //todo
+            this.refresh();
         });
 
         //set and style the saveBtn
@@ -160,9 +162,12 @@ public class GeneralTreeEdit {
             new binaryTreeEdit(tree.buildBinary(), false);
         });
 
-        //todo refresh btn
 
         RunUI.setScene(scene, true);
+    }
+
+    private void refresh() {
+        this.drawTree();
     }
 
     private void saveAndMigrate() {
@@ -218,17 +223,19 @@ public class GeneralTreeEdit {
         MenuItem addRight=new MenuItem("Add right node");
         MenuItem delete=new MenuItem("Delete node");
         label.setContextMenu(cm);
-        cm.getItems().addAll(addRight,addLeft,delete);
+        cm.getItems().addAll(addRight,addLeft);
+        if(root.parent != null)
+            cm.getItems().add(delete);
 
         addLeft.setOnAction(event ->{
             addLeft(root);
-
         });
 
         addRight.setOnAction(event ->{
             addRight(root);
 
         });
+
         delete.setOnAction(event ->{
             delete(root);
         });
@@ -255,18 +262,23 @@ public class GeneralTreeEdit {
 
 
     private void delete(GeneralNode2 root) {
+        root.delete();
+        this.refresh();
     }
 
     private void addRight(GeneralNode2 root) {
-        //todo
+        GeneralNode2 newNode = new GeneralNode2(root, 'R');//todo
+        root.children.addLast(newNode);
+        this.refresh();
     }
 
     private void addLeft(GeneralNode2 root) {
-        //todo
+        GeneralNode2 newNode = new GeneralNode2(root, 'L');//todo
+        root.children.addFirst(newNode);
+        this.refresh();
     }
 
 
 }
 
 
-//todo تضبيط الكبسات

@@ -1,8 +1,10 @@
 package App.UI.App2;
 
 import App.Logic.App2.BinaryNode2;
+import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
 import App.UI.RunUI;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -64,6 +66,8 @@ public class binaryTreeEdit {
         closebtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
         closebtn.setFont(Font.font("system ui", 15));
         closebtn.setTooltip(new Tooltip("close"));
+        HBox.setMargin(closebtn,new Insets(0 ,600, 0 ,0));
+
         buttonBox.getChildren().add(closebtn);
         DropShadow shadow = new DropShadow();
 
@@ -86,7 +90,7 @@ public class binaryTreeEdit {
         Button refreshbtn = new Button("Refresh");
         refreshbtn.setLayoutX(170);
         refreshbtn.setLayoutY(300);
-        refreshbtn.setPrefSize(50, 20);
+        refreshbtn.setPrefSize(70, 20);
         refreshbtn.setStyle("-fx-background-color:null; -fx-border-color:green; -fx-text-fill:green; -fx-border-radius:3");
         buttonBox.getChildren().add(refreshbtn);
         DropShadow shadow3 = new DropShadow();
@@ -102,7 +106,7 @@ public class binaryTreeEdit {
             refreshbtn.setCursor(Cursor.DEFAULT);
         });
         refreshbtn.setOnAction(event ->{
-            //todo
+           this.refresh();
         });
         //set and style the saveBtn
         Button saveBtn = new Button("Save");
@@ -159,6 +163,10 @@ public class binaryTreeEdit {
         RunUI.setScene(scene, true);
     }
 
+    private void refresh() {
+        this.drawTree();
+    }
+
     private void saveTree() {
         //save the Binary tree
         System.out.println();
@@ -207,7 +215,11 @@ public class binaryTreeEdit {
         MenuItem addRight=new MenuItem("Add right node");
         MenuItem delete=new MenuItem("Delete node");
         label.setContextMenu(cm);
-        cm.getItems().addAll(addRight,addLeft,delete);
+
+        cm.getItems().addAll(addRight,addLeft);
+        if(root.parent != null)
+            cm.getItems().add(delete);
+
 
         addLeft.setOnAction(event ->{
             addLeft(root);
@@ -243,12 +255,20 @@ public class binaryTreeEdit {
     }
 
     private void delete(BinaryNode2 root) {
+       root.delete();
+       this.refresh();
     }
 
     private void addRight(BinaryNode2 root) {
+        BinaryNode2 newNode = new BinaryNode2(root, 'R');//todo
+        root.right=newNode;
+        this.refresh();
     }
 
     private void addLeft(BinaryNode2 root) {
+        BinaryNode2 newNode = new BinaryNode2(root, 'L');//todo
+        root.left=newNode;
+        this.refresh();
 
     }
 
