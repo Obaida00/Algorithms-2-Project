@@ -2,9 +2,7 @@ package App.UI.App2;
 
 import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
-import App.UI.App2.GeneralTreeEdit;
 import App.UI.RunUI;
-import App.Logic.App2.GeneralNode2;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -94,7 +92,7 @@ public class addNodePopup {
         addBtn.setOnAction(e -> {
             String input = addValue.getText();
             if (input.length() > 1 || !Character.isAlphabetic(input.charAt(0))) {
-                //todo output error msg <only characters are allowed>
+                System.out.println("only characters are allowed");
             } else {
                 Tree2 tree = new Tree2(input.charAt(0));
                 tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));

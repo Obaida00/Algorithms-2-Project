@@ -19,8 +19,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 
-import static java.nio.file.Files.delete;
-
 public class binaryTreeEdit {
     private static final int START_DRAWING_Y = 30;
     private static final int START_DRAWING_X = 540;
@@ -85,8 +83,9 @@ public class binaryTreeEdit {
         //closeBtn action
         closebtn.setOnAction(e -> {
             this.saveTree();
-            RunUI.close();
+            RunUI.goBack();
         });
+
         Button refreshbtn = new Button("Refresh");
         refreshbtn.setLayoutX(170);
         refreshbtn.setLayoutY(300);

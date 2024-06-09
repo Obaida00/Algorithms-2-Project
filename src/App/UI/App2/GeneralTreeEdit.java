@@ -3,7 +3,6 @@ package App.UI.App2;
 import App.Logic.App2.BinaryNode2;
 import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
-import App.UI.App2.binaryTreeEdit;
 import App.UI.RunUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,8 +20,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
-
-import static java.nio.file.Files.delete;
 
 public class GeneralTreeEdit {
     private static final int START_DRAWING_Y = 30;
