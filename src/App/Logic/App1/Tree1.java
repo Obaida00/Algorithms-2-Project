@@ -1,6 +1,13 @@
 package App.Logic.App1;
 
+import App.Logic.App2.BinaryNode2;
+import App.Logic.App2.GeneralNode2;
+
 public class Tree1 {
+    private int NODE_WIDTH;// node width in pixels
+    private int VERTICAL_GAP;// the vertical gap in the visual tree
+    private int HORIZONTAL_GAP;// the horizontal gap in the visual tree
+
     public TreeNode1 root;
     public String[][] rootPaper;
     int width;
@@ -60,4 +67,49 @@ public class Tree1 {
         }
     }
 
+    public boolean calculatePositions(int startX, int startY, int nodeWidth, int horizontalGap, int verticalGap) {
+        this.NODE_WIDTH = nodeWidth;
+        this.HORIZONTAL_GAP = horizontalGap;
+        this.VERTICAL_GAP = verticalGap;
+
+        if(this.root == null)
+            return false;
+
+        this.calculateBinaryPositioning(this.root, startX, startY);
+        return true;
+    }
+
+    private void calculateBinaryPositioning(TreeNode1 root, int x, int y) {
+        if (root == null) {
+            return;
+        }
+
+        // Calculate the positions of the child nodes
+        calculateBinaryPositioning(root.left, x, y + this.VERTICAL_GAP);
+        int leftWidth = 0;
+        if (root.left != null)
+            leftWidth = root.left.width;
+        calculateBinaryPositioning(root.right,
+                x + leftWidth + NODE_WIDTH + /* i think this shouldnt be added */this.HORIZONTAL_GAP,
+                y + this.VERTICAL_GAP);
+
+        // Update the current node's position based on the positions of the child nodes
+        if (root.left != null) {
+            root.x = root.left.x + root.left.width + NODE_WIDTH / 2;
+        } else {
+            root.x = x;
+        }
+        root.y = y;
+
+        // Update the width of the subtree rooted at the current node
+        if (root.left == null && root.right == null) {
+            root.width = NODE_WIDTH;
+        } else if (root.left != null && root.right == null) {
+            root.width = root.left.width + NODE_WIDTH;
+        } else if (root.left == null && root.right != null) {
+            root.width = root.right.width + NODE_WIDTH;
+        } else {
+            root.width = root.left.width + NODE_WIDTH + root.right.width;
+        }
+    }
 }

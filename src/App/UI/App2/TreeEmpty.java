@@ -1,5 +1,6 @@
 package App.UI.App2;
 
+import App.UI.App2.addNodePopup;
 import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -17,7 +18,7 @@ public class TreeEmpty {
     public TreeEmpty() {
         //initialize the root and scene
         Group root = new Group();
-        Scene scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
+        Scene scene = new Scene(root, 500, 350, Color.valueOf("white"));
 
         //set and style the Tree is empty text
         Text emptyTreeTxt = new Text("The tree is empty");
@@ -32,7 +33,7 @@ public class TreeEmpty {
         addNodeBtn.setLayoutX(175);
         addNodeBtn.setLayoutY(170);
         addNodeBtn.setPrefSize(152, 33);
-        addNodeBtn.setStyle("-fx-background-color:null; -fx-border-color:#03045E; -fx-text-fill:#03045E");
+        addNodeBtn.setStyle("-fx-background-color:null; -fx-border-color:#03045E; -fx-text-fill:#03045E;  -fx-border-radius:3");
         root.getChildren().add(addNodeBtn);
         DropShadow shadow1 = new DropShadow();
 
@@ -49,16 +50,19 @@ public class TreeEmpty {
         //addNodeBtn action
         addNodeBtn.setOnAction(e -> {
             new addNodePopup();
+
         });
 
         //set and style the closeBtn
-        Button closeBtn = new Button("X");
-        closeBtn.setLayoutX(460);
-        closeBtn.setLayoutY(10);
+        Button closeBtn = new Button("Close");
+        closeBtn.setLayoutX(175);
+        closeBtn.setLayoutY(225);
         closeBtn.setBackground(null);
-        closeBtn.setPrefSize(10, 20);
+        closeBtn.setUnderline(true);
+
+        closeBtn.setPrefSize(150, 20);
         closeBtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
-        closeBtn.setFont(Font.font("system ui", 15));
+       // closeBtn.setFont(Font.font("system ui", 15));
         closeBtn.setTooltip(new Tooltip("close"));
         root.getChildren().add(closeBtn);
         DropShadow shadow = new DropShadow();
