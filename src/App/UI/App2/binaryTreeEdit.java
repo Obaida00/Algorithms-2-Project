@@ -18,8 +18,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 
 public class binaryTreeEdit {
-    private static final int START_DRAWING_Y = 30;
-    private static final int START_DRAWING_X = 540;
+    private static final int START_DRAWING_Y = 50;
+    private static final int START_DRAWING_X = 540-440;
     private static int NODE_WIDTH = 15;
     private static int MIN_NODE_WIDTH = 10;
     private static final int HORIZONTAL_GAP = 30;

@@ -28,7 +28,7 @@ public class TreeEmpty1 {
         add_node.setLayoutX(170);
         add_node.setLayoutY(170);
         add_node.setPrefSize(180,33);
-        add_node.setStyle("-fx-background-color:null; -fx-border-color:#03045E; -fx-text-fill:#03045E");
+        add_node.setStyle("-fx-background-color:null; -fx-border-color:#03045E; -fx-text-fill:#03045E ;-fx-border-radius:3");
         root.getChildren().add(add_node);
         DropShadow shadow1 =new DropShadow();
         add_node.addEventHandler(MouseEvent.MOUSE_ENTERED,(MouseEvent e)->{
