@@ -264,14 +264,12 @@ public class GeneralTreeEdit {
     }
 
     private void addRight(GeneralNode2 root) {
-        GeneralNode2 newNode = new GeneralNode2(root, 'R');//todo
-        root.children.addLast(newNode);
+        new addGeneralNodeRight(root);
         this.refresh();
     }
 
     private void addLeft(GeneralNode2 root) {
-        GeneralNode2 newNode = new GeneralNode2(root, 'L');//todo
-        root.children.addFirst(newNode);
+        new addGeneralNodeLeft(root);
         this.refresh();
     }
 

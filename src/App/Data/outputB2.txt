@@ -1,8 +1,0 @@
-A -> null,D
-D -> C, null
-C -> B, null
-B -> null,F
-F -> E, M
-M -> L, null
-L -> K, null
-K -> G, null

@@ -1,13 +1,11 @@
 package App.UI.App2;
 
 import App.Logic.App2.BinaryNode2;
-import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
 import App.UI.RunUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -127,7 +125,6 @@ public class binaryTreeEdit {
             saveBtn.setCursor(Cursor.DEFAULT);
         });
 
-        //todo saveBtn action
         saveBtn.setOnAction(e -> {
             this.saveTree();
         });
@@ -259,16 +256,13 @@ public class binaryTreeEdit {
     }
 
     private void addRight(BinaryNode2 root) {
-        BinaryNode2 newNode = new BinaryNode2(root, 'R');//todo
-        root.right=newNode;
+        new addBinaryNodeLeft(root);
         this.refresh();
     }
 
     private void addLeft(BinaryNode2 root) {
-        BinaryNode2 newNode = new BinaryNode2(root, 'L');//todo
-        root.left=newNode;
+        new addBinaryNodeRight(root);
         this.refresh();
-
     }
 
 
