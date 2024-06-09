@@ -9,7 +9,7 @@ public class Tree2 {
     private int VERTICAL_GAP;// the vertical gap in the visual tree
     private int HORIZONTAL_GAP;// the horizontal gap in the visual tree
     public GeneralNode2 generalRoot;
-    BinaryNode2 binaryRoot;
+    public BinaryNode2 binaryRoot;
 
     public Tree2(char data) {
         this.generalRoot = new GeneralNode2(null, data);
@@ -45,8 +45,9 @@ public class Tree2 {
     // return null;
     // }
 
-    public void buildBinary() {
+    public Tree2 buildBinary() {
         this.binaryRoot = toBinaryTree(null, this.generalRoot);
+        return this;
     }
 
     public BinaryNode2 toBinaryTree(BinaryNode2 newParent, GeneralNode2 node) {
@@ -217,11 +218,33 @@ public class Tree2 {
             this.calculateBinaryPositioning(this.binaryRoot, startX, startY);
             return true;
         } else if (!binaryVersion && this.generalRoot != null) {
-            // this.calculateGeneralPositioning(this.generalRoot, startX, startY);
+            this.calculateGeneralPositioning(this.generalRoot, startX, startY, 125);
+//            this.test(this.generalRoot, startX, startY);
             return true;
         }
         return false;
 
+    }
+
+    private void calculateGeneralPositioning(GeneralNode2 root, int x, int y, int horizontalGap) {
+        horizontalGap *=3;
+        if (root == null) {
+            return;
+        }
+
+        root.x = x;
+        root.y = y;
+        if (root.children.isEmpty())
+            return;
+
+        int newGap = horizontalGap / root.children.size();
+        for (int i = 0; i < root.children.size(); i++) {
+            GeneralNode2 child = root.children.get(i);
+            int newX = x - horizontalGap / 2 + i * newGap;
+
+            // Draw a line to the child and position it
+            calculateGeneralPositioning(child, newX, y + this.VERTICAL_GAP, newGap / 2);
+        }
     }
 
     private void calculateBinaryPositioning(BinaryNode2 root, int x, int y) {
