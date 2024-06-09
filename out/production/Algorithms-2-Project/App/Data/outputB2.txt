@@ -1,5 +1,4 @@
-A -> null,K
-K -> D, null
+A -> null,D
 D -> C, null
 C -> B, null
 B -> null,F
