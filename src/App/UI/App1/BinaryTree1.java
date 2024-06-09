@@ -4,12 +4,14 @@ import App.Logic.App1.Tree1;
 import App.Logic.App1.TreeNode1;
 import App.Logic.App2.BinaryNode2;
 import App.UI.RunUI;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -19,14 +21,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class BinaryTree1 {
-    private static final int OFFSET = 100;
     private static final int START_DRAWING_Y = 30;
-    private static final int START_DRAWING_X = 250 - OFFSET;
-    private static int NODE_WIDTH = 15;
-    private static int MIN_NODE_WIDTH = 10;
+    private static final int START_DRAWING_X = 540 - 100;
+    private static int NODE_WIDTH = 30;
+    private static int MIN_NODE_WIDTH = 20;
     private static final int HORIZONTAL_GAP = 40;
     private static final int VERTICAL_GAP = 50;
 
@@ -43,8 +45,10 @@ public class BinaryTree1 {
         BorderPane root = new BorderPane();
         this.visualPane = new Pane();
         HBox buttonBox = new HBox(10);
+        buttonBox.setStyle("-fx-padding:10");
+
         buttonBox.setAlignment(Pos.CENTER_RIGHT);
-        scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
+        scene = new Scene(root, 1080, 650, Color.valueOf("white"));
 //        buttonBox.setStyle("-fx-background-color:white; -fx-margin-right:50px");
 
         scene.widthProperty().addListener((obs, oldVal, newVal) -> drawTree());
@@ -56,65 +60,71 @@ public class BinaryTree1 {
         root.setBottom(buttonBox);
 
 
-        Button toDiagram = new Button("Transform into diagram");
-        toDiagram.setLayoutX(300);
-        toDiagram.setLayoutY(300);
-        toDiagram.setPrefSize(160, 33);
-        toDiagram.setStyle("-fx-background-color:#03045E; -fx-border-color:#03045E; -fx-text-fill:#FFFFFF");
-        buttonBox.getChildren().add(toDiagram);
-        DropShadow shadow1 = new DropShadow();
-        toDiagram.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-            toDiagram.setEffect(shadow1);
-            toDiagram.setCursor(Cursor.HAND);
-        });
-        toDiagram.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-            toDiagram.setEffect(null);
-            toDiagram.setCursor(Cursor.DEFAULT);
-        });
-        toDiagram.setOnAction(e -> {
-            new Diagram(this.tree);
-        });
-
-        Button save = new Button("Save");
-        save.setLayoutX(210);
-        save.setLayoutY(300);
-        save.setPrefSize(80, 33);
-        save.setStyle("-fx-background-color:null; -fx-border-color:#00FF00; -fx-text-fill:#00FF00");
-        buttonBox.getChildren().add(save);
+        Button savebtn = new Button("Save");
+        savebtn.setLayoutX(220);
+        savebtn.setLayoutY(300);
+        savebtn.setPrefSize(50, 20);
+        savebtn.setStyle("-fx-background-color:null; -fx-border-color:green; -fx-text-fill:green; -fx-border-radius:3");
+        buttonBox.getChildren().add(savebtn);
         DropShadow shadow2 = new DropShadow();
-        save.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-            save.setEffect(shadow2);
-            save.setCursor(Cursor.HAND);
+        savebtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            savebtn.setEffect(shadow2);
+            savebtn.setCursor(Cursor.HAND);
         });
-        save.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-            save.setEffect(null);
-            save.setCursor(Cursor.DEFAULT);
+        savebtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+            savebtn.setEffect(null);
+            savebtn.setCursor(Cursor.DEFAULT);
         });
-        save.setOnAction(e -> {
+        savebtn.setOnAction(e -> {
             this.saveTree();
         });
 
-        Button close = new Button("Close");
-        close.setLayoutX(20);
-        close.setLayoutY(300);
-        close.setBackground(null);
-        close.setUnderline(true);
-        close.setPrefSize(150, 20);
-        close.setStyle("-fx-background-color:null; -fx-text-fill:red");
-        buttonBox.getChildren().add(close);
+        Button toDiagramBtn = new Button("Transform into diagram");
+        toDiagramBtn.setLayoutX(290);
+        toDiagramBtn.setLayoutY(300);
+        toDiagramBtn.setPrefSize(190, 20);
+        toDiagramBtn.setStyle("-fx-background-color:#023E8A; -fx-text-fill:#CAF0F8");
+        buttonBox.getChildren().add(toDiagramBtn);
+        DropShadow shadow1 = new DropShadow();
+        toDiagramBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            toDiagramBtn.setEffect(shadow1);
+            toDiagramBtn.setCursor(Cursor.HAND);
+        });
+        toDiagramBtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+            toDiagramBtn.setEffect(null);
+            toDiagramBtn.setCursor(Cursor.DEFAULT);
+        });
+        toDiagramBtn.setOnAction(e -> {
+            new Diagram(this.tree);
+        });
+
+
+        Button closebtn = new Button("Close");
+        closebtn.setLayoutX(1);
+        closebtn.setLayoutY(300);
+        closebtn.setBackground(null);
+        closebtn.setUnderline(true);
+        closebtn.setPrefSize(100, 20);
+        closebtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
+        closebtn.setFont(Font.font("system ui", 15));
+        closebtn.setTooltip(new Tooltip("close"));
+        HBox.setMargin(closebtn,new Insets(0 ,700, 0 ,0));
+
         DropShadow shadow = new DropShadow();
-        close.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-            close.setEffect(shadow);
-            close.setCursor(Cursor.HAND);
+        closebtn.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            closebtn.setEffect(shadow);
+            closebtn.setCursor(Cursor.HAND);
         });
-        close.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-            close.setEffect(null);
-            close.setCursor(Cursor.DEFAULT);
+        closebtn.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+            closebtn.setEffect(null);
+            closebtn.setCursor(Cursor.DEFAULT);
         });
-        close.setOnAction(e -> {
+        closebtn.setOnAction(e -> {
+            this.saveTree();
             RunUI.goBack();
         });
 
+        buttonBox.getChildren().addFirst(closebtn);
 
         RunUI.setScene(scene, true);
     }
