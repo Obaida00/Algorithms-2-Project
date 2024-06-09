@@ -62,7 +62,7 @@ public class binaryTreeEdit {
         closeBtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
         closeBtn.setFont(Font.font("system ui", 15));
         closeBtn.setTooltip(new Tooltip("close"));
-        root.getChildren().add(closeBtn);
+        buttonBox.getChildren().add(closeBtn);
         DropShadow shadow = new DropShadow();
 
         //closeBtn hover effect
@@ -129,6 +129,7 @@ public class binaryTreeEdit {
 
         //transformBtn hover effect
         transformBtn.setOnAction(e -> {
+            this.tree.buildGeneral();
             RunUI.goBack();
         });
 

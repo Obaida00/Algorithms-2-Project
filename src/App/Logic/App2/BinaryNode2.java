@@ -5,7 +5,7 @@ public class BinaryNode2 extends TreeNode2 {
     public BinaryNode2 right;
     public int width;
     
-    BinaryNode2(BinaryNode2 parent, char value) {
+    public BinaryNode2(BinaryNode2 parent, char value) {
         this.value = value;
         this.parent = parent;
         left = null;

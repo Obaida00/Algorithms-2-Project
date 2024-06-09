@@ -90,8 +90,8 @@ public class addNodePopup {
         //addBtn action
         addBtn.setOnAction(e -> {
             String input = addValue.getText();
-            if (input.length() > 1) {
-                //todo output error msg <only characters are allowed>
+            if (input.length() > 1 || !Character.isAlphabetic(input.charAt(0))) {
+                System.out.println("only characters are allowed");
             } else {
                 Tree2 tree = new Tree2(input.charAt(0));
 //                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));

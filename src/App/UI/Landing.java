@@ -2,6 +2,8 @@ package App.UI;
 
 import App.Logic.App1.Tree1;
 import App.Logic.App2.Tree2;
+import App.UI.App1.BinaryTree1;
+import App.UI.App1.TreeEmpty1;
 import App.UI.App2.GeneralTreeEdit;
 import App.UI.App2.TreeEmpty;
 import javafx.scene.Cursor;
@@ -52,8 +54,12 @@ public class Landing {
 
         //app1Btn action
         app1Btn.setOnAction(e -> {
-            //check if there is a tree
-            //todo connect to 1nd question
+            Tree1 tree = this.readTree1();
+            if (tree == null) {
+                new TreeEmpty1();
+            } else {
+                new BinaryTree1(tree, false);
+            }
         });
 
 
@@ -119,8 +125,7 @@ public class Landing {
     }
 
     private Tree1 readTree1() {
-//        return RunUI.fileHandler1.loadTree();
-        return new Tree1(null);
+        return RunUI.fileHandler1.loadTree();
     }
 
     private Tree2 readTree2() {

@@ -65,7 +65,7 @@ public class GeneralTreeEdit {
         closeBtn.setStyle("-fx-background-color:null; -fx-text-fill:red");
         closeBtn.setFont(Font.font("system ui", 15));
         closeBtn.setTooltip(new Tooltip("close"));
-        root.getChildren().add(closeBtn);
+        buttonBox.getChildren().add(closeBtn);
         DropShadow shadow = new DropShadow();
 
         //closeBtn hover effect
@@ -134,6 +134,7 @@ public class GeneralTreeEdit {
             new binaryTreeEdit(tree.buildBinary(), false);
         });
 
+        //todo refresh btn
 
         RunUI.setScene(scene, true);
     }
@@ -206,3 +207,6 @@ public class GeneralTreeEdit {
 
 
 }
+//todo تعديل الأحجام
+//todo كبسة رز
+//todo تضبيط الكبسات
