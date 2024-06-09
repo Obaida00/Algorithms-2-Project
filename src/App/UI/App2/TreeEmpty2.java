@@ -1,6 +1,5 @@
 package App.UI.App2;
 
-import App.UI.App2.addNodePopup;
 import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -13,9 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class TreeEmpty {
+public class TreeEmpty2 {
 
-    public TreeEmpty() {
+    public TreeEmpty2() {
         //initialize the root and scene
         Group root = new Group();
         Scene scene = new Scene(root, 500, 350, Color.valueOf("white"));
@@ -49,7 +48,7 @@ public class TreeEmpty {
 
         //addNodeBtn action
         addNodeBtn.setOnAction(e -> {
-            new addNodePopup();
+            new addNodeTreeEmpty2();
 
         });
 

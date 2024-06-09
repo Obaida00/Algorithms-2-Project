@@ -1,8 +1,6 @@
 package App.UI.App1;
 
 import App.Logic.App1.Tree1;
-import App.Logic.App2.Tree2;
-import App.UI.App2.GeneralTreeEdit;
 import App.UI.RunUI;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -14,11 +12,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class addNodePopup {
+public class addNodeTreeEmpty1 {
 
-    public addNodePopup() {
+    public addNodeTreeEmpty1() {
         Group root = new Group();
         Scene scene = new Scene(root, 300, 200, Color.valueOf("#FFFFFF"));
 
