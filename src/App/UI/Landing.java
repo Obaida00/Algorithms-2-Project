@@ -21,7 +21,7 @@ public class Landing {
     public Landing() {
         //initialize the root and scene
         Group root = new Group();
-        Scene scene = new Scene(root, 500, 350, Color.valueOf("#CAF0F8"));
+        Scene scene = new Scene(root, 500, 350, Color.valueOf("white"));
 
 
         //set and style the welcomeTxt text

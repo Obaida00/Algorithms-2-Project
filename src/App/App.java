@@ -10,6 +10,7 @@ public class App extends Application {
     public static final String input2 = "src/App/Data/input2.txt";
     public static final String output2 = "src/App/Data/output2.txt";
 
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -19,5 +20,6 @@ public class App extends Application {
         //RunQ1.run();
         RunUI.run(stage);
         // RunQ2.run();
+
     }
 }

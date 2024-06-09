@@ -3,6 +3,7 @@ package App.UI;
 import App.App;
 import App.Logic.App1.FileHandler1;
 import App.Logic.App2.FileHandler2;
+import App.UI.Landing;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -70,6 +71,11 @@ public class RunUI {
     public static void close() {
         fileHandler2.close();
         window.close();
+    }
+
+    public static void setFullScreen(boolean b) {
+
+        window.setFullScreen(true);
     }
 
     //todo maybe set working tree
