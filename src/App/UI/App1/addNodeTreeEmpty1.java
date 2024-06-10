@@ -77,9 +77,9 @@ public class addNodeTreeEmpty1 {
             Tree1 tree = RunUI.fileHandler1.loadTree(input);
 //                tree = new Tree1(input.charAt(0));
 //                tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
-            if (tree != null)
+            if (tree != null) {
                 new BinaryTree1(tree, true);
-            else
+            }else
                 System.out.println("error");
         });
 

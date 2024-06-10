@@ -120,7 +120,7 @@ public class BinaryTree1 {
             closebtn.setCursor(Cursor.DEFAULT);
         });
         closebtn.setOnAction(e -> {
-            this.saveTree();
+            this.saveAndMigrate();
             RunUI.goBack();
         });
 
@@ -129,10 +129,14 @@ public class BinaryTree1 {
         RunUI.setScene(scene, true);
     }
 
+    private void saveAndMigrate() {
+        this.saveTree();
+        RunUI.migrateOutputQ1();
+    }
+
     private void saveTree() {
         //save the Binary tree
-        System.out.println();
-        this.tree.saveTreeToFile(RunUI.fileHandler1, true);
+        this.tree.saveTreeToFile(RunUI.fileHandler1, false);
 
         //update callstack
         if (newTree) {

@@ -97,8 +97,8 @@ public class addNodeTreeEmpty2 {
                 Tree2 tree = new Tree2(input.charAt(0));
                 tree.generalRoot.children.add(new GeneralNode2(tree.generalRoot, 'c'));
                 new GeneralTreeEdit(tree, true);
+                RunUI.goBack();
             }
-            RunUI.goBack();
         });
 
 

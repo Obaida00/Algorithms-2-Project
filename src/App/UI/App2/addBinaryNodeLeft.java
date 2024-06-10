@@ -94,8 +94,8 @@ public class addBinaryNodeLeft {
                 System.out.println("only characters are allowed");
             } else {
                 node.right= new BinaryNode2(node, input.charAt(0));
+                RunUI.goBack();
             }
-            RunUI.goBack();
         });
 
 

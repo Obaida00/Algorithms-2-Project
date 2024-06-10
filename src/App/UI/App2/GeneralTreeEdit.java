@@ -1,13 +1,11 @@
 package App.UI.App2;
 
-import App.Logic.App2.BinaryNode2;
 import App.Logic.App2.GeneralNode2;
 import App.Logic.App2.Tree2;
 import App.UI.RunUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -171,7 +169,7 @@ public class GeneralTreeEdit {
         this.saveTree();
 
         //migrate output file to input file cause its saved
-        RunUI.migrateOutput();
+        RunUI.migrateOutputQ2();
     }
 
     private void saveTree() {
@@ -212,6 +210,7 @@ public class GeneralTreeEdit {
         //circle1.setFill(Paint.valueOf("white"));
         Label label = new Label(Character.toString(root.value));
         label.setStyle("-fx-background-color:#023E8A ;-fx-text-fill:#CAF0F8");
+        label.setCursor(Cursor.HAND);
         label.setLayoutX(root.x - 3);
         label.setLayoutY(root.y - 10);
 

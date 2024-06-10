@@ -1,6 +1,3 @@
 A -> B, C, D, z, x, a, q, w
 B -> E, F
-F -> h, G, K, L, M
-G -> g
-M -> R
-g -> g
+F -> G, K, L, M
