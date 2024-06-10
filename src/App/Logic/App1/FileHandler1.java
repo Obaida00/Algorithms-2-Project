@@ -1,10 +1,6 @@
 package App.Logic.App1;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -46,6 +42,7 @@ public class FileHandler1 {
         } catch (Exception e) {
             System.out.println("no line to read from input file");
         }
+
         return line;
     }
 
@@ -62,6 +59,7 @@ public class FileHandler1 {
     // loads a tree form the input file with the correct formatting and converts it
     // to a Tree instence
     public Tree1 loadTree(String line) {
+        this.resetReader();
         TreeNode1 root = load(null, line);
         return new Tree1(root);
     }
@@ -198,7 +196,9 @@ public class FileHandler1 {
     public void saveTreeToFileLineFormatted(Tree1 tree) {
         StringBuilder line = new StringBuilder();
         saveTreeLineFormatted(tree.root, line);
+        this.clear();
         this.saveLine(line.toString());
+        this.flush();
     }
 
     private void saveTreeLineFormatted(TreeNode1 root, StringBuilder line) {
@@ -229,6 +229,22 @@ public class FileHandler1 {
 
     }
 
+    private void clear() {
+        try {
+            this.writer = new BufferedWriter(new FileWriter(this.outputFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void flush() {
+        try {
+            writer.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // closes the opening reading/writing streams
     public void close() {
         try {
@@ -236,6 +252,33 @@ public class FileHandler1 {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void migrateOutput() {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.outputFile));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(this.inputFile));
+
+            //... Loop as long as there are input lines.
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();   // Write system dependent end of line.
+            }
+
+            //... Close reader and writer.
+            bufferedReader.close();  // Close to unlock.
+            bufferedWriter.close();  // Close to unlock and flush to disk.
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void resetReader() {
+        try {
+            this.reader = new Scanner(this.inputFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -95,8 +95,8 @@ public class addGeneralNodeRight {
                 System.out.println("only characters are allowed");
             } else {
                 node.children.addLast(new GeneralNode2(node, input.charAt(0)));
+                RunUI.goBack();
             }
-            RunUI.goBack();
         });
 
 

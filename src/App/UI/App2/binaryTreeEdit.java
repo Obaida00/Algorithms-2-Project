@@ -206,15 +206,16 @@ public class binaryTreeEdit {
         label.setLayoutX(root.x - 3);
         label.setLayoutY(root.y - 10);
         label.setStyle("-fx-background-color:#023E8A ;-fx-text-fill:#CAF0F8");
+        label.setCursor(Cursor.HAND);
         ContextMenu cm=new ContextMenu();
         MenuItem addLeft=new MenuItem("Add left node");
         MenuItem addRight=new MenuItem("Add right node");
         MenuItem delete=new MenuItem("Delete node");
         label.setContextMenu(cm);
 
-        cm.getItems().addAll(addRight,addLeft);
+        cm.getItems().add(addRight);
         if(root.parent != null)
-            cm.getItems().add(delete);
+            cm.getItems().addAll(delete, addLeft);
 
 
         addLeft.setOnAction(event ->{

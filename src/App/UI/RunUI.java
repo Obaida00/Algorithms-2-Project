@@ -3,7 +3,6 @@ package App.UI;
 import App.App;
 import App.Logic.App1.FileHandler1;
 import App.Logic.App2.FileHandler2;
-import App.UI.Landing;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -64,8 +63,12 @@ public class RunUI {
         fileHandler2 = new FileHandler2(App.input2, App.output2);
     }
 
-    public static void migrateOutput() {
+    public static void migrateOutputQ2() {
         fileHandler2.migrateOutput();
+    }
+
+    public static void migrateOutputQ1() {
+        fileHandler1.migrateOutput();
     }
 
     public static void close() {
@@ -77,6 +80,7 @@ public class RunUI {
 
         window.setFullScreen(true);
     }
+
 
     //todo maybe set working tree
 }
